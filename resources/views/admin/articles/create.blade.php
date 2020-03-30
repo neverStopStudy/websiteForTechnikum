@@ -6,6 +6,7 @@
 @section("content")
     <form action="{{route('admin.article.store')}}" method="post" enctype="multipart/form-data">
         @csrf
+    <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
         <div class="form-group">
             <label for="formGroupExampleInput">Заголовок</label>
             <input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="Example input">

@@ -19,8 +19,19 @@ class Article extends Model
         return $this->belongsTo('App\User',"user_id");
     }
 
+    /**
+     * @return mixed
+    */
     public function images()
     {
-        return $this->hasMany('App\Image');
+        return $this->belongsToMany(Image::class, 'articles_images');
     }
+
+    public function mainImageLink()
+    {
+        return $this->images()->where("main", true)->first()->link;
+    }
+
+    
+ 
 }

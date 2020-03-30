@@ -8,10 +8,13 @@ class Image extends Model
 {
     protected $table = "images";
 
-    protected $fillable = ['article_id','link','main'];
+    protected $fillable = ['link'];
 
-    public function article()
-    {
-        return $this->belongsTo("App\Article");
-    }
+     /**
+     * @return mixed
+     */
+     public function articles()
+     {
+        return $this->belongsToMany(Article::class, 'articles_images');
+     }
 }

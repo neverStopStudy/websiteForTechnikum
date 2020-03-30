@@ -11,15 +11,15 @@ class ArticlesController extends Controller
 {
     public function show($id)
     {
-        $article = Article::where('id', $id)->first();
-        $imgs = Image::where("article_id", $article->id)->get();
+        $article = Article::find($id);
+        $imgs = $article->images()->get();
 
         return view('admin.articles.show', ['article' => $article, 'imgs' => $imgs]);
     }
 
     public function welcome()
     {
-        $articles = Article::all();
+        $articles = Article::with('images')->get();
         return view('welcome', ['articles' => $articles]);
     }
 
@@ -36,25 +36,20 @@ class ArticlesController extends Controller
 
     public function store(Request $request)
     {
-
         if ($request->imgs != NULL) {
-            $article_id = Article::create($request->all())->id;
+            $article = Article::create($request->all());
             $index = 1;
             foreach ($request->imgs as $img) {
-
-
                 $ext = $img->extension();
-                $path = $article_id . "_" . $index . "." . $ext;
+                $path = $article->id . "_" . $index . "." . $ext;
                 $file = $img->storeAs('public', $path);
                 $url = Storage::url($file);
 
                 $image = new Image();
                 if ($index == 1) $image->main = true;
-
-                $image->article_id = $article_id;
                 $image->link = $url;
                 $image->save();
-
+                $article->images()->attach($image);
                 $index++;
             }
         } else {
@@ -67,7 +62,9 @@ class ArticlesController extends Controller
     public function edit($id)
     {
         $article = Article::find($id);
-        return view('admin.articles.edit', ['article' => $article]);
+        $imgs = $article->images()->get();
+
+        return view('admin.articles.edit', ['article' => $article, 'imgs' => $imgs]);
     }
 
     public function update(Request $request, $id)
@@ -80,6 +77,7 @@ class ArticlesController extends Controller
 
     public function destroy($id)
     {
+        Article::find($id)->images()->delete();
         Article::destroy($id);
         return redirect()->route('admin.article.index');
     }

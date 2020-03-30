@@ -7,7 +7,7 @@
 @section("side-block")
     <h2>Изменить статью</h2>
     <div class="article-imgs">
-        @forelse($article->images as $image)
+        @forelse($imgs as $image)
             <img src="{{$image->link}}" alt="article_img">
         @empty
             <p>Нет фото у Статьи</p>

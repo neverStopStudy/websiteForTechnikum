@@ -57,7 +57,6 @@ class NewUser extends Notification
     public function toArray($notifiable)
     {
         return [
-
             'message' => "Вы успешно зарегистрированы"
         ];
     }

@@ -2,6 +2,12 @@
 @extends("layouts.app")
 
 @section("side-block")
+{{-- {{$article = \App\Article::first()}}
+{{dd($article->images()->first())}} --}}
+{{-- // @foreach ($article->images()->first() as $image)
+//     {{ $image->link }}
+// @endforeach --}}
+
     <div class="col-sm-3 col-12 side-block">
         <div class="side-menu">
             <h3>Меню сайта</h3>
@@ -29,8 +35,8 @@
         <div class="main__title text-center">
             <h2>Останні новини</h2>
         </div>
-
         @foreach($articles as $article)
+     
             <div class="article">
                 <div class="row d-flex ">
                     <div class="article__img col-12 col-md-6">
@@ -43,8 +49,7 @@
                         user
                         <a href="{{route("user.article.show", $article->id)}}">
                         @endadmin
-                            <img src="{{App\Article::findOrFail($article->id)
-                            ->images()->where("main",true)->first()->link}}" alt="article_img">
+                            <img src="{{$article->mainImageLink()}}" alt="article_main_img">
                         </a>
                     </div>
                     <div class="article__text col-12 col-md-6">
