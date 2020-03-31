@@ -13,8 +13,13 @@ class Image extends Model
      /**
      * @return mixed
      */
-     public function articles()
-     {
+    public function articles()
+    {
         return $this->belongsToMany(Article::class, 'articles_images');
-     }
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_images');
+    }
 }

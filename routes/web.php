@@ -56,6 +56,11 @@ Route::group(['group' => 'admin', 'middleware' => ['role:admin', 'auth'], 'prefi
     Route::put('/user/{id}/update', 'UsersController@update')->name('admin.user.update');
     Route::get('/user/{id}/delete', 'UsersController@destroy')->name('admin.user.destroy');
 });
+
+Route::post('/user/store', 'UsersController@store')->name('admin.user.store');
+    Route::get('/user/{id}/show', 'UsersController@show')->name('admin.user.show');
+    Route::get('/user/{id}/edit', 'UsersController@edit')->name('user.edit');
+    Route::put('/user/{id}/update', 'UsersController@update')->name('admin.user.update');
 Route::post('/comment/store', 'CommentsController@store')->name('comment.store')->middleware('auth');
 
 Route::get('/', 'ArticlesController@welcome')->name('user.article.index');

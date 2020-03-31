@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Permission;
+use Illuminate\Support\Facades\Storage;
+use App\Image;
 
 class UsersController extends Controller
 {
@@ -62,9 +64,15 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::all();
-        $permissions = Permission::all();
-        return view("admin.users.edit", ['user' => $user,'roles' => $roles, 'permissions' => $permissions]);
+        
+        if($user->roles()->where('slug','admin')->get()->isNotEmpty())
+        {
+            $roles = Role::all();
+            $permissions = Permission::all();
+            return view("admin.users.edit", ['user' => $user,'roles' => $roles, 'permissions' => $permissions]);
+        } else {
+            return view("user.users.edit", ['user' => $user]);
+        }
     }
 
     /**
@@ -79,7 +87,25 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->fill($request->all());
         $user->save();
-        return redirect()->route('admin.users.index');
+
+        if($request->imgs){
+            $index = 1;
+            foreach($request->imgs as $img){
+                $ext = $img->extension();
+                $path = $user->name . "_" . $index . "." . $ext;
+                $file = $img->storeAs('public', $path);
+                $url = Storage::url($file);
+
+                $image = new Image();
+                if ($index == 1) $image->main = true;
+                $image->link = $url;
+                $image->save();
+                $user->images()->attach($image);
+                $index++;
+            }
+        }
+        
+        return redirect()->route('home');
     }
 
     /**
@@ -90,6 +116,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        User::find($id)->images()->delete();
         User::destroy($id);
         return redirect()->back();
     }

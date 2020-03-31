@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $notifications = auth()->user()->notifications;
-        return view('home',compact('notifications'));
+        $images = auth()->user()->images;
+        return view('home',compact('notifications','images'));
     }
 }

@@ -14,6 +14,12 @@
     .card-body {
         padding: 0;
     }
+    .profile-img{
+        margin-bottom: 10px;
+    }
+    .settings{
+        margin-bottom: 10px;
+    }
 </style>
 @section("side-block")
     <div class="col-sm-3 col-12 side-block">
@@ -70,25 +76,54 @@
             <div class="text-center">
                 <h2>Профиль</h2>
             </div>
-            <div class="row ">
-                {{--                    @if (session('status'))--}}
-                {{--                        <div class="alert alert-success" role="alert">--}}
-                {{--                            {{ session('status') }}--}}
-                {{--                        </div>--}}
-                {{--                    @endif--}}
             <div class="profile">
-                <div class="profile-img">
-                    <img src="" alt="">
+                
+                <div class="profile-img text-center">
+                    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner">
+                            @forelse($images as $img)
+                                @if($loop->first)
+                                    <div class="carousel-item active">
+                                        <img src="{{$img->link}}" alt="carosel-item" width="200px" height="200px">
+                                    </div>
+                                @else
+                                    <div class="carousel-item ">
+                                        <img src="{{$img->link}}" alt="..." width="200px"  height="200px">
+                                    </div>
+                                @endif
+                            @empty
+                                <div class="alert">Немає фото</div>
+                            @endforelse
+                        </div>
+                        <a class="carousel-control-prev bg-secondary" href="#carouselExampleControls" role="button"
+                           data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next bg-secondary" href="#carouselExampleControls" role="button"
+                           data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
                 </div>
+                
                 <div class="profile-text">
-
+                    <p>Имя: {{auth()->user()->name}}</p>
                 </div>
-            </div>
+                <div class="profile-date">
+                    <p>Зарегистрирован: {{auth()->user()->created_at->diffForHumans()}}</p>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-12 col-sm-4 content">
         <div class="container">
+            <div class="card settings">
+                <div class="card-body">
+                    <a href="{{route('user.edit', Auth::user()->id)}}">Настройки профиля</a>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     Уведомления

@@ -39,4 +39,9 @@ class User extends Authenticatable
     {
         return $this->hasMany("App\Article");
     }
+
+    public function images()
+    {
+        return $this->belongsToMany(Image::class, 'users_images');
+    }
 }
