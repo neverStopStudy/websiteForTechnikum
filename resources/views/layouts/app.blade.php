@@ -282,7 +282,13 @@
             </div>
         </section>
         <section class="footer">
+            <div class="navbar-fixed-bottom row-fluid">
+            <div class="navbar-inner">
+            <div class="container">
             <p class="text-center">Made by Roman Winogradow 2020 year</p>
+        </div>
+      </div>
+            </div>
         </section>
     </div>
 </body>

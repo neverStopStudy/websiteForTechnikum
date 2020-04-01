@@ -8,6 +8,7 @@ use App\Role;
 use App\Permission;
 use Illuminate\Support\Facades\Storage;
 use App\Image;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -29,7 +30,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $roles = Role::all();
+        return view('admin.users.create',compact('roles'));
     }
 
     /**
@@ -40,7 +42,33 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $user = User::create($request->all());
+        // $user->fill($request->all());
+        // $user->save();
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        if($request->imgs){
+            $index = 1;
+            foreach($request->imgs as $img){
+                $ext = $img->extension();
+                $path = $user->name . "_" . $index . "." . $ext;
+                $file = $img->storeAs('public', $path);
+                $url = Storage::url($file);
+
+                $image = new Image();
+                if ($index == 1) $image->main = true;
+                $image->link = $url;
+                $image->save();
+                $user->images()->attach($image);
+                $index++;
+            }
+        }
+        
+        return redirect()->route('home');
     }
 
     /**
@@ -108,6 +136,7 @@ class UsersController extends Controller
         return redirect()->route('home');
     }
 
+    
     /**
      * Remove the specified resource from storage.
      *
