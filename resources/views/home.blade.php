@@ -53,7 +53,17 @@
                     <a class="dropdown-item" href="{{route('home')}}">Статистика</a>
                 </div>
             </li>
-
+            <li class="list-group-item dropdown-side-block">
+                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                    Роли
+                </button>
+                <div class="dropdown-menu" x-placement="right-start"
+                     style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <a class="dropdown-item" href="{{route("admin.users.index")}}">Всі роли</a>
+                    <a class="dropdown-item" href="{{route('admin.user.create')}}">Додати роль</a>
+                </div>
+            </li>
             <li class="list-group-item"><a href="#">Предметы</a></li>
             <li class="list-group-item"><a href="#">Контакти</a></li>
             <li class="list-group-item"><a href="#">Інформація</a></li>

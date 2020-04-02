@@ -25,7 +25,7 @@ class ArticlesController extends Controller
 
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::with('comments')->get();
         return view('admin.articles.index', ['articles' => $articles]);
     }
 

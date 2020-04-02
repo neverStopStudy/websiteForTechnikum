@@ -19,7 +19,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('roles','permissions')->get(['id','name']);
         return view('admin.users.index', ['users' => $users]);
     }
 
@@ -42,9 +42,6 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = User::create($request->all());
-        // $user->fill($request->all());
-        // $user->save();
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

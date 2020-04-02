@@ -37,41 +37,40 @@
             </thead>
             <tbody>
             @forelse($articles as $article)
-                <tr><a href="#123">
-                        <th scope="row">{{$loop->iteration}}</th>
-                        <th>{{mb_substr($article->title, 0, 20) . "..."}}</th>
-                        <th>{{mb_substr($article->text, 0, 30) . "..."}}</th>
-                        <th>{{$article->views}}</th>
-                        <th>{{App\Article::find(1)->comments->count() }}</th>
-                        <th>
-                            @if($article->status) Вкл
-                            @else Выкл
-                            @endif
-                        </th>
-                        <th>{{$article->created_at}}</th>
-                        <th>
-                    </a>
-                    <div class="btn-group-vertical">
-                        <div class="article__link">
-                            <a href="{{route("admin.article.show", $article->id)}}">
-                                <button type="button" class="btn btn-success">Дивитись</button>
-                            </a>
+                <tr>
+                    <th scope="row">{{$loop->iteration}}</th>
+                    <th>{{mb_substr($article->title, 0, 20) . "..."}}</th>
+                    <th>{{mb_substr($article->text, 0, 30) . "..."}}</th>
+                    <th>{{$article->views}}</th>
+                    <th>{{$article->comments->count()}}</th>
+                    <th>
+                        @if($article->status) Вкл
+                        @else Выкл
+                        @endif
+                    </th>
+                    <th>{{$article->created_at}}</th>
+                    <th>
+                        <div class="btn-group-vertical">
+                            <div class="article__link">
+                                <a href="{{route("admin.article.show", $article->id)}}">
+                                    <button type="button" class="btn btn-success">Дивитись</button>
+                                </a>
+                            </div>
+                            <div class="article__link">
+                                <a href="{{route('admin.article.edit', $article->id)}}">
+                                    <button type="button" class="btn btn-warning">Змінити</button>
+                                </a>
+                            </div>
+                            <div class="article__link">
+                                <form action="{{route('admin.article.destroy', $article->id)}}" method="get">
+                                    @csrf
+                                    @method("DELETE")
+                                    <button type="button" class="btn btn-danger admin-delete-btn">
+                                        <input type="submit" value="Видалити" class="btn admin-delete-input">
+                                    </button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="article__link">
-                            <a href="{{route('admin.article.edit', $article->id)}}">
-                                <button type="button" class="btn btn-warning">Змінити</button>
-                            </a>
-                        </div>
-                        <div class="article__link">
-                            <form action="{{route('admin.article.destroy', $article->id)}}" method="get">
-                                @csrf
-                                @method("DELETE")
-                                <button type="button" class="btn btn-danger admin-delete-btn">
-                                    <input type="submit" value="Видалити" class="btn admin-delete-input">
-                                </button>
-                            </form>
-                        </div>
-                    </div>
                     </th>
                 </tr>
             @empty

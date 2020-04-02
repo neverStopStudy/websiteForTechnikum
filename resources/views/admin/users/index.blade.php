@@ -21,6 +21,7 @@
     </div>
 @endsection
 @section("content")
+{{-- {{dd($users)}} --}}
     <div class="col-12 col-sm-9 content">
         <table class="table">
             <thead class="thead-light">
