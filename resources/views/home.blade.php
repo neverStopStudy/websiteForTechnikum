@@ -60,8 +60,8 @@
                 </button>
                 <div class="dropdown-menu" x-placement="right-start"
                      style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <a class="dropdown-item" href="{{route("admin.users.index")}}">Всі роли</a>
-                    <a class="dropdown-item" href="{{route('admin.user.create')}}">Додати роль</a>
+                    <a class="dropdown-item" href="{{route("role.index")}}">Всі роли</a>
+                    <a class="dropdown-item" href="{{route('role.create')}}">Додати роль</a>
                 </div>
             </li>
             <li class="list-group-item"><a href="#">Предметы</a></li>

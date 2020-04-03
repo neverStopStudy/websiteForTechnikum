@@ -23,6 +23,9 @@
 //});
 use App\User;
 
+// use Symfony\Component\Routing\Route;
+use Illuminate\Support\Facades\Route;
+
 Route::get('mail', function () {
 //    $user = Auth::user();
 //    dd(auth()->user()->hasRole('admin'));
@@ -55,6 +58,8 @@ Route::group(['group' => 'admin', 'middleware' => ['role:admin', 'auth'], 'prefi
     Route::get('/user/{id}/edit', 'UsersController@edit')->name('admin.user.edit');
     Route::put('/user/{id}/update', 'UsersController@update')->name('admin.user.update');
     Route::get('/user/{id}/delete', 'UsersController@destroy')->name('admin.user.destroy');
+    
+    Route::resource('role', 'RolesController');
 });
 
 Route::post('/user/store', 'UsersController@store')->name('admin.user.store');
