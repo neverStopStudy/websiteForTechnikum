@@ -5,6 +5,7 @@
         margin-right: 5px;
     }
 </style>
+{{$users->links()}}
 @section("side-block")
     <div class="col-sm-3 col-12 side-block">
         <div class="side-menu">
@@ -22,7 +23,9 @@
 @endsection
 @section("content")
 {{-- {{dd($users)}} --}}
+
     <div class="col-12 col-sm-9 content">
+        
         <table class="table">
             <thead class="thead-light">
             <tr>
@@ -84,6 +87,7 @@
             @endforelse
             </tbody>
         </table>
+        
         {{--  END MAIN     --}}
         <div class="container d-flex justify-content-center">
             <nav aria-label="Page navigation example">
