@@ -19,7 +19,7 @@ class ArticlesController extends Controller
 
     public function welcome()
     {
-        $articles = Article::with('images')->get();
+        $articles = Article::with('images')->paginate(3);
         return view('welcome', ['articles' => $articles]);
     }
 

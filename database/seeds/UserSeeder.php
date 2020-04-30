@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
 
         $createLessons = Permission::where('slug','create-lessons')->first();
         $solveLessons = Permission::where('slug','solve-lessons')->first();
-
+        
         $user1 = new User();
         $user1->name = 'Jhon Deo';
         $user1->email = 'jhon@deo.com';
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         $user1->save();
         $user1->roles()->attach($teacher);
         $user1->permissions()->attach($createLessons);
-
+ 
         $user2 = new User();
         $user2->name = 'Mike Thomas';
         $user2->email = 'mike@thomas.com';

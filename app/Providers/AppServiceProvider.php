@@ -36,5 +36,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('student', function () {
             return auth()->check() && auth()->user()->hasRole('student');
         });
+        Blade::directive('linkactive', function ($route) {
+            return "<?php echo Request::is($route) ? 'active' : null; ?>";
+        });
     }
 }

@@ -41,7 +41,6 @@ Route::get('mail', function () {
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::group(['group' => 'admin', 'middleware' => ['role:admin', 'auth'], 'prefix' => 'admin'], function () {
-
     Route::get('/', 'ArticlesController@welcome')->name('welcome');
     Route::get('/articles', 'ArticlesController@index')->name('admin.article.index');
     Route::get('/article/create', 'ArticlesController@create')->name('admin.article.create');
@@ -63,13 +62,12 @@ Route::group(['group' => 'admin', 'middleware' => ['role:admin', 'auth'], 'prefi
 });
 
 Route::post('/user/store', 'UsersController@store')->name('admin.user.store');
-    Route::get('/user/{id}/show', 'UsersController@show')->name('admin.user.show');
-    Route::get('/user/{id}/edit', 'UsersController@edit')->name('user.edit');
-    Route::put('/user/{id}/update', 'UsersController@update')->name('admin.user.update');
+Route::get('/user/{id}/show', 'UsersController@show')->name('admin.user.show');
+Route::get('/user/{id}/edit', 'UsersController@edit')->name('user.edit');
+Route::put('/user/{id}/update', 'UsersController@update')->name('admin.user.update');
 Route::post('/comment/store', 'CommentsController@store')->name('comment.store')->middleware('auth');
 
 Route::get('/', 'ArticlesController@welcome')->name('user.article.index');
-Route::get('/articles', 'ArticlesController@index')->name('user.article.index');
 Route::get('/article/create', 'ArticlesController@create')->name('user.article.create');
 Route::post('/article/store', 'ArticlesController@store')->name('user.article.store');
 Route::get('/article/{id}/show', 'ArticlesController@show')->name('user.article.show');

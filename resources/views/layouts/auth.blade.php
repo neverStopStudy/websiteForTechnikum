@@ -81,9 +81,9 @@
         footer{
             background-color: darkgrey;
         }
-        /* nav{
+        nav{
             display: none;
-        } */
+        }
         /*    */
         .header__title > p{
             font-size: 20px;
@@ -210,13 +210,13 @@
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">
-                                    <button type="button" class="btn btn-success">{{ __('Логін') }}</button>
+                                    <button type="button" class="btn btn-success">{{ __('Логин') }}</button>
                                 </a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">
-                                        <button type="button" class="btn btn-primary btn-reg">{{ __('Реєстрація') }}</button>
+                                        <button type="button" class="btn btn-primary btn-reg">{{ __('Регистрация') }}</button>
                                     </a>
                                 </li>
                             @endif
@@ -227,12 +227,12 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('home') }}">
-                                        {{ __('Особистий кабінет') }}
+                                        {{ __('Личный кабинет') }}
                                     </a>
                                     <a class="dropdown-item " href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Виход') }}
+                                        {{ __('Выход') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -256,95 +256,14 @@
     <main class="app-content py-3">
         <div class="container">
                 @yield('breadcrumbs')
-            <div class="d-flex row">
-                    
-                {{--  START SIDE-MENU     --}}
-                <div class="col-12 col-md-3 col-sm-4 side-block">
-                    <div class="side-menu">
-                        <h3>Меню сайта</h3>
-                    </div>
-                    @if(Request::is('home'))
-                        @admin
-                        <ul class="list-group">
-                            <li class="list-group-item active">Главная</li>
-                            <li class="list-group-item dropdown-side-block">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    Cтатьи
-                                </button>
-                                <div class="dropdown-menu" x-placement="right-start"
-                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("admin.article.index")}}">Все статьи</a>
-                                    <a class="dropdown-item" href="{{route('admin.article.create')}}">Добавить статью</a>
-                                    <a class="dropdown-item" href="{{route('home')}}">Статистика</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    Користувачі
-                                </button>
-                                <div class="dropdown-menu" x-placement="right-start"
-                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("admin.users.index")}}">Всі користувачі</a>
-                                    <a class="dropdown-item" href="{{route('admin.user.create')}}">Додати користувача</a>
-                                    <a class="dropdown-item" href="{{route('home')}}">Статистика</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    Роли
-                                </button>
-                                <div class="dropdown-menu" x-placement="right-start"
-                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("role.index")}}">Всі роли</a>
-                                    <a class="dropdown-item" href="{{route('role.create')}}">Додати роль</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item"><a href="#">Предметы</a></li>
-                            <li class="list-group-item"><a href="#">Контакти</a></li>
-                            <li class="list-group-item"><a href="#">Інформація</a></li>
-                        </ul>
-                    @endadmin
-                    @teacher
-                    1
-                    @endteacher
-                        <div class="card settings">
-                            <div class="card-body">
-                                <a href="{{route('user.edit', Auth::user()->id)}}">Настройки профиля</a>
-                            </div>
-                        </div>
-                    @else
-                    <ul class="list-group">
-                        <li class="list-group-item {{ Request::is('/') ? 'active' : null }}">
-                            <a href="{{route('user.article.index')}}">Главная</a> 
-                        </li>
-                        <li class="list-group-item {{ Request::is('/1') ? 'active' : null }}">
-                            <a href="#">Інформація про технікум</a>
-                        </li>
-                        <li class="list-group-item {{ Request::is('/2') ? 'active' : null }}">
-                            <a href="#">Виховання</a>
-                        </li>
-                        <li class="list-group-item {{ Request::is('/3') ? 'active' : null }}">
-                            <a href="#">Абітуріенту</a>
-                        </li>
-                        <li class="list-group-item {{ Request::is('/4') ? 'active' : null }}">
-                            <a href="#">Контакти</a>
-                        </li>
-                        <li class="list-group-item {{ Request::is('/5') ? 'active' : null }}">
-                            <a href="#">Інформація</a>
-                        </li>
-                    </ul>
-                    @endif
-                </div>
+                <div class="row justify-content-center">
                 {{--  END SIDE-MENU     --}}
-                <div class="col-12 col-md-9 col-sm-8 content">
+                <div class="col-md-8 content">
+                
                     @include('layouts.partials.flash')
                     @yield('content')
                 </div>
-            </div>
-            @yield('pagination')
+                </div>
         </div>
     </main>
     <footer>
