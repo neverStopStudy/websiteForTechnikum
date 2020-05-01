@@ -13,6 +13,11 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $student = new Role();
+        $student->name = 'Admin';
+        $student->slug = 'admin';
+        $student->save();
+
+        $student = new Role();
         $student->name = 'Student';
         $student->slug = 'student';
         $student->save();

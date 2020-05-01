@@ -19,17 +19,16 @@
         <h2>Останні новини</h2>
     </div>
     @foreach($articles as $article)
+    
         <div class="article">
             <div class="row d-flex ">
                 <div class="article__img col-12 col-md-6">
                     @admin
-                    Admin
-                    <a href="{{route("admin.article.show", $article->id)}}">
+                        <a href="{{route("admin.article.show", $article->id)}}">
                     @else
-                    user
-                    <a href="{{route("user.article.show", $article->id)}}">
+                        <a href="{{route("user.article.show", $article->id)}}">
                     @endadmin
-                        {{-- <img src="{{$article->mainImageLink()}}" alt="article_main_img"> --}}
+                        <img src="{{$article->image_link}}" alt="article_main_img">
                     </a>
                 </div>
                 <div class="article__text col-12 col-md-6">
@@ -42,10 +41,8 @@
                     <div class="btn-group btn-group-sm">
                         <div class="article__link">
                             @admin
-                            Админ
                                 <a href="{{route("admin.article.show", $article->id)}}">
                             @else
-                            Юзер
                                 <a href="{{route("user.article.show", $article->id)}}">
                             @endadmin
                                 <button type="button" class="btn btn-success">Читать</button>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     protected $table = "articles";
-    protected $fillable = ['title','text','user_id','img_id'];
+    protected $fillable = ['title','text','user_id','image_link'];
 
     public function comments()
     {
@@ -19,18 +19,11 @@ class Article extends Model
         return $this->belongsTo('App\User',"user_id");
     }
 
-    /**
-     * @return mixed
-    */
     public function images()
     {
         return $this->belongsToMany(Image::class, 'articles_images');
     }
 
-    public function mainImageLink()
-    {
-        return $this->images()->where("main", true)->first()->link;
-    }
 
     
  

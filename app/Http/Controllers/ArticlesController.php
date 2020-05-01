@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\Storage;
 use App\Image;
+use App\Http\Requests\ArticleRequest;
 
 class ArticlesController extends Controller
 {
@@ -19,7 +20,7 @@ class ArticlesController extends Controller
 
     public function welcome()
     {
-        $articles = Article::with('images')->paginate(3);
+        $articles = Article::with('images')->orderBy('created_at', 'desc')->paginate(5);
         return view('welcome', ['articles' => $articles]);
     }
 
@@ -34,10 +35,19 @@ class ArticlesController extends Controller
         return view('admin.articles.create');
     }
 
-    public function store(Request $request)
-    {
+    public function store(ArticleRequest $request)
+    {        
+        $file = Storage::put('public', $request->image_link);
+        $url = Storage::url($file);
+
+        $article =  Article::create([
+            'user_id' => $request->user_id,
+            'title' => $request->title,
+            'text' =>  $request->text,
+            'image_link' =>  $url,
+        ]);
+
         if ($request->imgs != NULL) {
-            $article = Article::create($request->all());
             $index = 1;
             foreach ($request->imgs as $img) {
                 $ext = $img->extension();
@@ -46,16 +56,12 @@ class ArticlesController extends Controller
                 $url = Storage::url($file);
 
                 $image = new Image();
-                if ($index == 1) $image->main = true;
                 $image->link = $url;
                 $image->save();
                 $article->images()->attach($image);
                 $index++;
             }
-        } else {
-            echo "Загрузи фото!";
-            return redirect()->back();
-        }
+        } 
         return redirect()->route('welcome');
     }
 
@@ -67,7 +73,7 @@ class ArticlesController extends Controller
         return view('admin.articles.edit', ['article' => $article, 'imgs' => $imgs]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, $id)
     {
         $article = Article::find($id);
         $article->fill($request->all());

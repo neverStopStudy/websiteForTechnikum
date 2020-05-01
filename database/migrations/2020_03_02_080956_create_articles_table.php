@@ -20,6 +20,7 @@ class CreateArticlesTable extends Migration
             $table->integer("user_id");
             $table->boolean("status")->default(0);
             $table->unsignedInteger("views")->default(0);
+            $table->string("image_link")->nullable();
             $table->timestamps();
         });
     }

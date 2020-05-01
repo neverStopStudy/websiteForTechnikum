@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Http\Requests\GroupRequest;
 use Illuminate\Http\Request;
 
 class GroupsController extends Controller
@@ -14,7 +15,7 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.groups.index', ['groups' => Group::all()]);
     }
 
     /**
@@ -24,7 +25,7 @@ class GroupsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.groups.create');
     }
 
     /**
@@ -33,9 +34,10 @@ class GroupsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GroupRequest $request)
     {
-        //
+        Group::create($request->all());
+        return view('admin.groups.index', ['groups' => Group::all()]);
     }
 
     /**
@@ -46,7 +48,8 @@ class GroupsController extends Controller
      */
     public function show(Group $group)
     {
-        //
+        $group = Group::where('id', $group->id)->with('students','subjects')->first();
+        return view('admin.groups.show', compact('group'));
     }
 
     /**
@@ -57,7 +60,7 @@ class GroupsController extends Controller
      */
     public function edit(Group $group)
     {
-        //
+        return view('admin.groups.edit',['group' => $group]);
     }
 
     /**
@@ -67,9 +70,12 @@ class GroupsController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(GroupRequest $request, Group $group)
     {
-        //
+        $group = Group::find($group->id);
+        $group->fill($request->all());
+        $group->save();
+        return redirect()->route('group.index');
     }
 
     /**
@@ -80,6 +86,7 @@ class GroupsController extends Controller
      */
     public function destroy(Group $group)
     {
-        //
+        Group::destroy($group->id);
+        return redirect()->route('group.index');
     }
 }
