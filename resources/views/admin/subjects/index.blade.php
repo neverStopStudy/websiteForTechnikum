@@ -4,14 +4,14 @@
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Адмінка</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Всі групи</li>
+            <li class="breadcrumb-item active" aria-current="page">Всі предмети</li>
         </ol>
     </div>
 @endsection
 @section("content")
 <div class="admin-btn text-left py-3">
-    <a href="{{route('group.create')}}">
-        <button type="button" class="btn btn-primary">Додати групу</button>
+    <a href="{{route('subject.create')}}">
+        <button type="button" class="btn btn-primary">Додати предмет</button>
     </a>
 </div>
     <div class="col-12 col-sm-9 content">
@@ -19,29 +19,29 @@
             <thead class="thead-light">
                 <tr>
                     <th>#</th>
-                    <th>Назва групи</th>
+                    <th>Назва предмету</th>
                     <th>Дії</th>
                 </tr>
             </thead>
             <tbody>
-            @forelse($groups as $group)
+            @forelse($subjects as $subject)
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
-                    <th>{{$group->name}}</th>
+                    <th>{{$subject->name}}</th>
                     <th>
                         <div class="btn-group">
                             <div class="article__link">
-                                <a href="{{route("group.show", $group->id)}}">
+                                <a href="{{route("subject.show", $subject->id)}}">
                                     <button type="button" class="btn btn-success">Дивитись</button>
                                 </a>
                             </div>
                             <div class="article__link">
-                                <a href="{{route('group.edit', $group->id)}}">
+                                <a href="{{route('subject.edit', $subject->id)}}">
                                     <button type="button" class="btn btn-warning">Змінити</button>
                                 </a>
                             </div>
                             <div class="article__link">
-                                <form action="{{route('group.destroy', $group->id)}}" method="post">
+                                <form action="{{route('subject.destroy', $subject->id)}}" method="post">
                                     @csrf
                                     @method("DELETE")
                                     <button type="button" class="btn btn-danger admin-delete-btn">
@@ -54,7 +54,7 @@
                 </tr>
             @empty
                 <tr class="table-warning">
-                    <td colspan="3">Немає груп! Додайте групу!</td>
+                    <td colspan="3">Немає Предметів! Додайте предмет!</td>
                 </tr>
             @endforelse
             </tbody>

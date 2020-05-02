@@ -16,7 +16,6 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->unsignedInteger('id')->autoIncrement();
             $table->string('name');
-            $table->boolean('status');
         });
     }
 

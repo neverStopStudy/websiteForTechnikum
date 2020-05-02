@@ -60,6 +60,7 @@ Route::group(['group' => 'admin', 'middleware' => ['role:admin', 'auth'], 'prefi
     
     Route::resource('role', 'RolesController');
     Route::resource('group', 'GroupsController');
+    Route::resource('subject', 'SubjectsController');
 });
 
 Route::post('/user/store', 'UsersController@store')->name('admin.user.store');
