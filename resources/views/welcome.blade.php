@@ -9,7 +9,7 @@
     @admin
     <div class="admin-btn text-center">
         <a href="{{route('admin.article.create')}}">
-            <button type="button" class="btn btn-primary">Добавить статью</button>
+            <button type="button" class="btn btn-primary">Додати статю</button>
         </a>
     </div>
     @endadmin

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Material;
+use App\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class MaterialController extends Controller
+class MaterialsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.materials.index', ['materials' => Material::with('subject')->paginate(5)]);
     }
 
     /**
@@ -24,7 +26,7 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.materials.create', ['subjects' => Subject::all()]);
     }
 
     /**
@@ -35,7 +37,19 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $file = Storage::put('public/materials', $request->link);
+        // $url = Storage::url($file);
+        $file = $request->file('link');
+        $path = $file->storeAs('files', $file->getClientOriginalName());
+ 
+        $material =  Material::create([
+            'subject_id' => $request->subject_id,
+            'name' => $request->name,
+            'text' =>  $request->text,
+            'link' =>  $path,
+        ]);
+
+        return redirect()->route('material.index');
     }
 
     /**

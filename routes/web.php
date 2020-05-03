@@ -61,7 +61,10 @@ Route::group(['group' => 'admin', 'middleware' => ['role:admin', 'auth'], 'prefi
     Route::resource('role', 'RolesController');
     Route::resource('group', 'GroupsController');
     Route::resource('subject', 'SubjectsController');
+    Route::resource('material', 'MaterialsController');
 });
+
+Route::get('download/{path}', 'DownloadFilesController@download')->name('download');
 
 Route::post('/user/store', 'UsersController@store')->name('admin.user.store');
 Route::get('/user/{id}/show', 'UsersController@show')->name('admin.user.show');

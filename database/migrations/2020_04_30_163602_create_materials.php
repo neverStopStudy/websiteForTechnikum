@@ -17,6 +17,7 @@ class CreateMaterials extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('subject_id');
             $table->string('name');
+            $table->string('text');
             $table->string('link');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->timestamps();

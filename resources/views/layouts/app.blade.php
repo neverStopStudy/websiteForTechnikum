@@ -324,7 +324,17 @@
                                     <a class="dropdown-item" href="{{route("subject.create")}}">Додати предмет</a>
                                 </div>
                             </li>
-                            
+                             <li class="list-group-item dropdown-side-block">
+                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Матеріали
+                                </button>
+                                <div class="dropdown-menu" x-placement="right-start"
+                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item" href="{{route("material.index")}}">Всі матеріали</a>
+                                    <a class="dropdown-item" href="{{route("material.create")}}">Додати матеріал</a>
+                                </div>
+                            </li>
                         </ul>
                     @endadmin
                     @teacher
