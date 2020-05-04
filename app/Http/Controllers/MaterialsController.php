@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MaterialRequest;
 use App\Material;
 use App\Subject;
 use Illuminate\Http\Request;
@@ -35,14 +36,12 @@ class MaterialsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MaterialRequest $request)
     {
-        // $file = Storage::put('public/materials', $request->link);
-        // $url = Storage::url($file);
         $file = $request->file('link');
         $path = $file->storeAs('files', $file->getClientOriginalName());
  
-        $material =  Material::create([
+        Material::create([
             'subject_id' => $request->subject_id,
             'name' => $request->name,
             'text' =>  $request->text,
@@ -60,7 +59,7 @@ class MaterialsController extends Controller
      */
     public function show(Material $material)
     {
-        //
+        return view('admin.materials.show', compact('material'));
     }
 
     /**
@@ -71,7 +70,8 @@ class MaterialsController extends Controller
      */
     public function edit(Material $material)
     {
-        //
+        $subjects = Subject::all();
+        return view('admin.materials.edit', compact('material','subjects'));
     }
 
     /**
@@ -81,9 +81,12 @@ class MaterialsController extends Controller
      * @param  \App\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Material $material)
+    public function update(MaterialRequest $request, Material $material)
     {
-        //
+        $material = Material::find($material->id);
+        $material->fill($request->all());
+        $material->save();
+        return redirect()->route('material.index');
     }
 
     /**
@@ -94,6 +97,7 @@ class MaterialsController extends Controller
      */
     public function destroy(Material $material)
     {
-        //
+        Material::destroy($material->id);
+        return redirect()->route('material.index');
     }
 }

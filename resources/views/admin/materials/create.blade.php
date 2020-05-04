@@ -4,7 +4,7 @@
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Адмінка</a></li>
-        <li class="breadcrumb-item"><a href="{{route('admin.article.index')}}">Навчальні матеріали</a></li>
+        <li class="breadcrumb-item"><a href="{{route('material.index')}}">Навчальні матеріали</a></li>
             <li class="breadcrumb-item active" aria-current="page">Додати навчальний матеріал</li>
         </ol>
     </div>
