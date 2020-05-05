@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Http\Requests\GroupRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 class GroupsController extends Controller
@@ -88,5 +89,11 @@ class GroupsController extends Controller
     {
         Group::destroy($group->id);
         return redirect()->route('group.index');
+    }
+
+    public function deleteUserFromGroup(Group $group, User $user)
+    {
+        $group->students()->detach($user->id);
+        return redirect()->back();
     }
 }

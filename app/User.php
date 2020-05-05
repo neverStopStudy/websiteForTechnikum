@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Image::class, 'users_images');
     }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'groups_users');
+    }
 }

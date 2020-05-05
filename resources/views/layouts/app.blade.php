@@ -370,8 +370,10 @@
                 </div>
                 {{--  END SIDE-MENU     --}}
                 <div class="col-12 col-md-9 col-sm-8 content">
-                    @include('layouts.partials.flash')
+                    {{-- @include('layouts.partials.flash') --}}
+                    
                     @yield('content')
+                    
                 </div>
             </div>
             @yield('pagination')

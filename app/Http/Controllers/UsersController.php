@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\User;
 use Illuminate\Http\Request;
 use App\Role;
@@ -19,8 +20,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles','permissions')->get(['id','name']);
-        return view('admin.users.index', ['users' => $users]);
+        $users = User::with('roles','permissions')->paginate(5);
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -31,7 +32,8 @@ class UsersController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('admin.users.create',compact('roles'));
+        $groups = Group::all();
+        return view('admin.users.create',compact('roles','groups'));
     }
 
     /**
@@ -42,12 +44,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-
+        
+        $user->groups()->attach($request->group_id);
+        
         if($request->imgs){
             $index = 1;
             foreach($request->imgs as $img){
@@ -89,15 +94,12 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $groups = Group::all();
+
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view("admin.users.edit", compact('user','roles','permissions','groups'));
         
-        if($user->roles()->where('slug','admin')->get()->isNotEmpty())
-        {
-            $roles = Role::all();
-            $permissions = Permission::all();
-            return view("admin.users.edit", ['user' => $user,'roles' => $roles, 'permissions' => $permissions]);
-        } else {
-            return view("user.users.edit", ['user' => $user]);
-        }
     }
 
     /**
@@ -112,6 +114,9 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->fill($request->all());
         $user->save();
+        
+        $user->groups()->delete();
+        $user->groups()->attach($request->group_id);
 
         if($request->imgs){
             $index = 1;

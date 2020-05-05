@@ -1,37 +1,42 @@
 @extends("layouts.app")
-<style>
-    .article-imgs img{
-        width: 100%;
-    }
-</style>
-@section("side-block")
-    <h2>Змінити користувача</h2>
-@endsection
 
+@section('breadcrumbs')
+    <div aria-label="breadcrumb">
+        <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('home')}}">Адмінка</a></li>
+        <li class="breadcrumb-item"><a href="{{route('admin.users.index')}}">Всі користувачі</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Змінити користувача</li>
+        </ol>
+    </div>
+@endsection
 @section("content")
+<div class="content__title text-center">
+    <h2>Змінити користувача - {{$user->name}}</h2>
+</div>
     <form action="{{route('admin.user.update',$user->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method("PUT")
         <div class="form-group">
-            <label for="formGroupExampleInput">Заголовок</label>
+            <label for="formGroupExampleInput">ФІО</label>
             <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Example input"
         value="{{$user->name}}">
         </div>
         <div class="form-group">
             <label for="select">Роль</label>
             <select id="select" class="form-control" name="role">
-                {{-- {{dd($user->roles->toArray())}} --}}
                 @forelse($roles as $role)
-
-{{--                    @if($user->roles == $role->id)--}}
-{{--                        <option value="{{$role->id}}" selected>{{$role->name}}</option>--}}
-{{--                    @else--}}
-                        <option value="{{$role->id}}">{{$role->name}}</option>
-{{--                    @endif--}}
+                    <option value="{{$role->id}}">{{$role->name}}</option>
                 @empty
                     <p>Нет роли! Добавьте роль!</p>
                 @endforelse
-
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="select">Оберіть группу</label>
+            <select class="custom-select" name="group_id" id="select">
+                @foreach ($groups as $group)
+                    <option value="{{$group->id}}">{{$group->name}}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">

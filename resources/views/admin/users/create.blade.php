@@ -1,14 +1,18 @@
 @extends("layouts.app")
-<style>
-    .article-imgs img{
-        width: 100%;
-    }
-</style>
-@section("side-block")
-    <h2>Змінити користувача</h2>
-@endsection
 
+@section('breadcrumbs')
+    <div aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('home')}}">Адмінка</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin.users.index')}}">Всі користувачі</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Додати користувача</li>
+        </ol>
+    </div>
+@endsection
 @section("content")
+<div class="content__title text-center">
+    <h2>Додати  користувача</h2>
+</div>
     <form action="{{route('admin.user.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
@@ -35,6 +39,14 @@
                 @empty
                     <p>Нет роли! Добавьте роль!</p>
                 @endforelse
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="select">Оберіть группу</label>
+            <select class="custom-select" name="group_id" id="select">
+                @foreach ($groups as $group)
+                    <option value="{{$group->id}}">{{$group->name}}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">

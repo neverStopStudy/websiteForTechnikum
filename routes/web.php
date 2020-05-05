@@ -59,7 +59,10 @@ Route::group(['group' => 'admin', 'middleware' => ['role:admin', 'auth'], 'prefi
     Route::get('/user/{id}/delete', 'UsersController@destroy')->name('admin.user.destroy');
     
     Route::resource('role', 'RolesController');
+   
     Route::resource('group', 'GroupsController');
+    Route::get('group/{group}/user/{user}/delete', 'GroupsController@deleteUserFromGroup')->name('group.delete.user');     
+
     Route::resource('subject', 'SubjectsController');
     Route::resource('material', 'MaterialsController');
 });
