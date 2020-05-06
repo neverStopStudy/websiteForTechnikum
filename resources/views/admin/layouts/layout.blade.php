@@ -1,132 +1,212 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-    {{--    <script--}}
-    {{--        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"--}}
-    {{--        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="--}}
-    {{--        crossorigin="anonymous"></script>--}}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event)
-            {
-                    if(window.innerWidth < 575){
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                        document.getElementById("main-nav").classList.add("fixed-top");
-                    }
-                    if(document.body.clientWidth >= 575) {
-                    document.getElementById("main-nav").classList.remove("fixed-top");
-                    }
+    <title> Курахівська філія ПЄСТ
+        Дніпровського державного технікуму енергетичних та інформаційних технологій </title>
 
-            });
-    </script>
-    </head>
-    <body>
-{{--        <div class="flex-center position-ref full-height">--}}
-{{--            @if (Route::has('login'))--}}
-{{--                <div class="top-right links">--}}
-{{--                    @auth--}}
-{{--                        <a href="{{ url('/home') }}">Home</a>--}}
-{{--                    @else--}}
-{{--                        <a href="{{ route('login') }}">Login</a>--}}
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
-{{--                        @if (Route::has('register'))--}}
-{{--                            <a href="{{ route('register') }}">Register</a>--}}
-{{--                        @endif--}}
-{{--                    @endauth--}}
-{{--                </div>--}}
-{{--            @endif--}}
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Styles -->
+    
+</head>
+<body id="app">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-center col-md-3">
+                        <div class="logo">
+                            <a href="{{url("/")}}">
+                                <img src="/logo.png" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-8 d-flex justify-content-center flex-column col-center">
+                        <div class="row">
+                            <div class="header__title">
+                                <p class="text-center">Курахівська філія ПЄСТ
+                                    Дніпровського державного технікуму енергетичних та інформаційних технологій</p>
+                            </div>
+                        </div>
 
-    <section class="header">
-        <div class="container">
-
-        </div>
-        {{--<div class="container">
-            <div class="row">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle"
-                            type="button" id="dropdownMenu1" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <a class="dropdown-item" href="#!">Action</a>
-                        <a class="dropdown-item" href="#!">Another action</a>
                     </div>
                 </div>
-            </div>
-        </div>--}}
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    </section>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
 
-        <nav class="navbar navbar-expand-sm navbar-light bg-light " id="main-nav">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                    </ul>
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">
+                                    <button type="button" class="btn btn-success">{{ __('Логін') }}</button>
+                                </a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">
+                                        <button type="button" class="btn btn-primary btn-reg">{{ __('Реєстрація') }}</button>
+                                    </a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @admin
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard.index') }}">
+                                        {{ __('Адмін панель') }}
+                                    </a>
+                                    @endadmin
+                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                        {{ __('Особистий кабінет') }}
+                                    </a>
+                                    <a class="dropdown-item " href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Виход') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Інформація про технікум</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Виховання</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Інформація про технікум</a>
-                            <a class="dropdown-item" href="#">Виховання</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
         </nav>
-        <section class="main">
-            <div class="container">
-                <div class="d-flex row">
-                    {{--  START SIDE-MENU     --}}
-                    <div class="col-sm-4 col-12 side-block">
+    </header>
+    <main class="app-content py-3">
+        
+        <div class="container">
+            
+                @yield('breadcrumbs')
+            <div class="d-flex row">
                     
-                    {{--  END SIDE-MENU     --}}
-                    <div class="col-12 col-sm-8 content">
-                        @yield('content')
+                {{--  START SIDE-MENU     --}}
+                <div class="col-12 col-md-3 col-sm-4 side-block">
+                    <div class="side-menu">
+                        <h3>Меню сайта</h3>
                     </div>
+                        <ul class="list-group">
+                            <li class="list-group-item active">Главная</li>
+                            <li class="list-group-item dropdown-side-block">
+                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Cтатьи
+                                </button>
+                                <div class="dropdown-menu" x-placement="right-start"
+                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item" href="{{route("admin.article.index")}}">Все статьи</a>
+                                    <a class="dropdown-item" href="{{route('admin.article.create')}}">Добавить статью</a>
+                                    <a class="dropdown-item" href="{{route('home')}}">Статистика</a>
+                                </div>
+                            </li>
+                            <li class="list-group-item dropdown-side-block">
+                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Користувачі
+                                </button>
+                                <div class="dropdown-menu" x-placement="right-start"
+                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item" href="{{route("admin.users.index")}}">Всі користувачі</a>
+                                    <a class="dropdown-item" href="{{route('admin.user.create')}}">Додати користувача</a>
+                                    <a class="dropdown-item" href="{{route('home')}}">Статистика</a>
+                                </div>
+                            </li>
+                            <li class="list-group-item dropdown-side-block">
+                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Роли
+                                </button>
+                                <div class="dropdown-menu" x-placement="right-start"
+                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item" href="{{route("role.index")}}">Всі роли</a>
+                                    <a class="dropdown-item" href="{{route('role.create')}}">Додати роль</a>
+                                </div>
+                            </li>
+                            <li class="list-group-item dropdown-side-block">
+                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Групи
+                                </button>
+                                <div class="dropdown-menu" x-placement="right-start"
+                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item" href="{{route("group.index")}}">Всі групи</a>
+                                    <a class="dropdown-item" href="{{route("group.create")}}">Додати групу</a>
+                                </div>
+                            </li>
+                            <li class="list-group-item dropdown-side-block">
+                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Предмети
+                                </button>
+                                <div class="dropdown-menu" x-placement="right-start"
+                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item" href="{{route("subject.index")}}">Всі предмети</a>
+                                    <a class="dropdown-item" href="{{route("subject.create")}}">Додати предмет</a>
+                                </div>
+                            </li>
+                             <li class="list-group-item dropdown-side-block">
+                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Матеріали
+                                </button>
+                                <div class="dropdown-menu" x-placement="right-start"
+                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item" href="{{route("material.index")}}">Всі матеріали</a>
+                                    <a class="dropdown-item" href="{{route("material.create")}}">Додати матеріал</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="card settings">
+                            <div class="card-body">
+                                <a href="{{route('user.edit', Auth::user()->id)}}">Настройки профиля</a>
+                            </div>
+                        </div>
+                </div>
+                {{--  END SIDE-MENU     --}}
+                <div class="col-12 col-md-9 col-sm-8 content">
+                    {{-- @include('layouts.partials.flash') --}}
+                    @yield('content')
+                    
                 </div>
             </div>
-        </section>
-    {{--<script>
-                $('ul.nav li.dropdown').hover(function() {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                }, function() {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                });
-            </script>--}}
-
-        <section class="footer">
-            <p class="text-center">Made by Roman Winogradow 2020 year</p>
-        </section>
-    </body>
+            @yield('pagination')
+        </div>
+    </main>
+    <footer>
+        <div class="navbar-fixed-bottom row-fluid">
+            <div class="navbar-inner">
+                <div class="container">
+                    <p class="text-center">Made by Roman Winogradow 2020 year</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
 </html>

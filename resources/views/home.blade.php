@@ -21,9 +21,7 @@
         margin-bottom: 10px;
     }
 </style>
-
 @section('content')
-    <div class="col-12 col-sm-9 content">
         <div class="container">
             <div class="text-center">
                 <h2>Профиль</h2>
@@ -84,5 +82,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 @endsection

@@ -20,158 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Styles -->
-    <style>
-        html, body {
-            /* background-color: #fff; */
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-        
-        body{
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-        .app-content{
-            flex: 1;
-        }
-        p{
-            margin-bottom: 0;
-        }
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-        footer{
-            background-color: darkgrey;
-        }
-        /* nav{
-            display: none;
-        } */
-        /*    */
-        .header__title > p{
-            font-size: 20px;
-        }
-        .no-gutters {
-            margin-right: 0;
-            margin-left: 0;
-        }
-        > .col,
-        > [class*="col-"] {
-            padding-right: 0;
-            padding-left: 0;
-        }
-        /* .container{
-            margin-right: 0;
-            margin-left: 0;
-        }
-        .row{
-            margin-right: 0;
-            margin-left: 0;
-        } */
-        .side-block .active > a{
-            color:white;
-        }
-        .btn-reg{
-            margin-left: 5px;
-        }
-        .header{
-            padding: 10px 0px 10px 0px;
-        }
-        .logo img{
-            width: 150px;
-        }
-        .article__img  img{
-            width: 100%;
-        }
-        .article{
-            margin: 15px 0px;
-        }
-
-        .slider{
-            margin: 0 auto;
-        }
-
-        #main-nav{
-            display: none;
-        }
-        /*navbar end*/
-        .admin-delete-input{
-            padding:0px;
-        }
-        .admin-delete-btn{
-            padding: 5px 10px;
-        }
-        .nav-links{
-            display:none;
-        }
-        .navbar-toggler{
-            margin-top: 10px;
-        }
-        @media (max-width: 575px) {
-            .nav-links{
-                display:block;
-            }
-            header > .container > .row {
-                flex-direction: column;
-                margin-top: 60px;
-            }
-            .col-center{
-                text-align: center;
-                margin: 0 auto;
-            }
-            .header__title > p {
-                margin-top: 5px;
-                font-size: 16px;
-            }
-            .article .d-flex{
-                flex-direction: column;
-            }
-            .side-block{
-                display:none;
-            }
-            #main-nav{
-                display: flex;
-            }
-
-        }
-    </style>
+    
 </head>
 <body id="app">
     <header>
@@ -226,6 +75,11 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @admin
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard.index') }}">
+                                        {{ __('Адмін панель') }}
+                                    </a>
+                                    @endadmin
                                     <a class="dropdown-item" href="{{ route('home') }}">
                                         {{ __('Особистий кабінет') }}
                                     </a>
@@ -254,7 +108,9 @@
         </nav>
     </header>
     <main class="app-content py-3">
+        
         <div class="container">
+            
                 @yield('breadcrumbs')
             <div class="d-flex row">
                     
@@ -371,7 +227,6 @@
                 {{--  END SIDE-MENU     --}}
                 <div class="col-12 col-md-9 col-sm-8 content">
                     {{-- @include('layouts.partials.flash') --}}
-                    
                     @yield('content')
                     
                 </div>
