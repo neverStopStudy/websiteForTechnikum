@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Group::class, 'groups_users');
     }
+
+    public function materials()
+    {
+        return $this->hasMany("App\Material");
+    }
 }

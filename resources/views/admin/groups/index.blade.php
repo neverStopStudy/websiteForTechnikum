@@ -9,10 +9,6 @@
     </div>
 @endsection
 @section("content")
-
-    <div class="content__title text-center">
-        <h2>Всі групи</h2>
-    </div>
     <div class="admin-btn text-left py-3">
         <a href="{{route('group.create')}}">
             <button type="button" class="btn btn-primary">Додати групу</button>

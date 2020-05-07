@@ -6,6 +6,7 @@ use App\Http\Requests\MaterialRequest;
 use App\Material;
 use App\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class MaterialsController extends Controller
@@ -17,7 +18,7 @@ class MaterialsController extends Controller
      */
     public function index()
     {
-        return view('admin.materials.index', ['materials' => Material::with('subject')->paginate(5)]);
+        return view('materials.index', ['materials' => Material::with('subject')->paginate(5)]);
     }
 
     /**
@@ -27,7 +28,7 @@ class MaterialsController extends Controller
      */
     public function create()
     {
-        return view('admin.materials.create', ['subjects' => Subject::all()]);
+        return view('materials.create', ['subjects' => Subject::all()]);
     }
 
     /**
@@ -43,6 +44,7 @@ class MaterialsController extends Controller
  
         Material::create([
             'subject_id' => $request->subject_id,
+            'user_id' => $request->user_id,
             'name' => $request->name,
             'text' =>  $request->text,
             'link' =>  $path,
@@ -59,7 +61,7 @@ class MaterialsController extends Controller
      */
     public function show(Material $material)
     {
-        return view('admin.materials.show', compact('material'));
+        return view('materials.show', compact('material'));
     }
 
     /**
@@ -71,7 +73,7 @@ class MaterialsController extends Controller
     public function edit(Material $material)
     {
         $subjects = Subject::all();
-        return view('admin.materials.edit', compact('material','subjects'));
+        return view('materials.edit', compact('material','subjects'));
     }
 
     /**
@@ -100,4 +102,12 @@ class MaterialsController extends Controller
         Material::destroy($material->id);
         return redirect()->route('material.index');
     }
+
+    public function ownmaterials(){        
+        return view('materials.index', [
+            'materials' => Auth::user()->materials()->with('subject')->paginate(5),
+            'teacher' => true
+            ]);
+    }
+    
 }

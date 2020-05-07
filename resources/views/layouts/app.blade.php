@@ -80,6 +80,11 @@
                                         {{ __('Адмін панель') }}
                                     </a>
                                     @endadmin
+                                    @teacher
+                                    <a class="dropdown-item" href="{{ route('material.ownmaterial') }}">
+                                        {{ __('Мої матеріали') }}
+                                    </a>
+                                    @endteacher
                                     <a class="dropdown-item" href="{{ route('home') }}">
                                         {{ __('Особистий кабінет') }}
                                     </a>
@@ -108,9 +113,7 @@
         </nav>
     </header>
     <main class="app-content py-3">
-        
         <div class="container">
-            
                 @yield('breadcrumbs')
             <div class="d-flex row">
                     
@@ -118,90 +121,7 @@
                 <div class="col-12 col-md-3 col-sm-4 side-block">
                     <div class="side-menu">
                         <h3>Меню сайта</h3>
-                    </div>
-                    @if(Request::is('home'))
-                        @admin
-                        <ul class="list-group">
-                            <li class="list-group-item active">Главная</li>
-                            <li class="list-group-item dropdown-side-block">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    Cтатьи
-                                </button>
-                                <div class="dropdown-menu" x-placement="right-start"
-                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("admin.article.index")}}">Все статьи</a>
-                                    <a class="dropdown-item" href="{{route('admin.article.create')}}">Добавить статью</a>
-                                    <a class="dropdown-item" href="{{route('home')}}">Статистика</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    Користувачі
-                                </button>
-                                <div class="dropdown-menu" x-placement="right-start"
-                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("admin.users.index")}}">Всі користувачі</a>
-                                    <a class="dropdown-item" href="{{route('admin.user.create')}}">Додати користувача</a>
-                                    <a class="dropdown-item" href="{{route('home')}}">Статистика</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    Роли
-                                </button>
-                                <div class="dropdown-menu" x-placement="right-start"
-                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("role.index")}}">Всі роли</a>
-                                    <a class="dropdown-item" href="{{route('role.create')}}">Додати роль</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    Групи
-                                </button>
-                                <div class="dropdown-menu" x-placement="right-start"
-                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("group.index")}}">Всі групи</a>
-                                    <a class="dropdown-item" href="{{route("group.create")}}">Додати групу</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        Предмети
-                                </button>
-                                <div class="dropdown-menu" x-placement="right-start"
-                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("subject.index")}}">Всі предмети</a>
-                                    <a class="dropdown-item" href="{{route("subject.create")}}">Додати предмет</a>
-                                </div>
-                            </li>
-                             <li class="list-group-item dropdown-side-block">
-                                <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        Матеріали
-                                </button>
-                                <div class="dropdown-menu" x-placement="right-start"
-                                    style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("material.index")}}">Всі матеріали</a>
-                                    <a class="dropdown-item" href="{{route("material.create")}}">Додати матеріал</a>
-                                </div>
-                            </li>
-                        </ul>
-                    @endadmin
-                    @teacher
-                    1
-                    @endteacher
-                        <div class="card settings">
-                            <div class="card-body">
-                                <a href="{{route('user.edit', Auth::user()->id)}}">Настройки профиля</a>
-                            </div>
-                        </div>
-                    @else
+                    </div>                
                     <ul class="list-group">
                         <li class="list-group-item {{ Request::is('/') ? 'active' : null }}">
                             <a href="{{route('user.article.index')}}">Главная</a> 
@@ -221,12 +141,18 @@
                         <li class="list-group-item {{ Request::is('/5') ? 'active' : null }}">
                             <a href="#">Інформація</a>
                         </li>
+                        @if (Request::is('home') )
+                            <li class="list-group-item active">
+                                <a href="{{route('user.edit', Auth::user()->id)}}">Настройки профиля</a>
+                            </li>
+                        @endif
                     </ul>
-                    @endif
                 </div>
                 {{--  END SIDE-MENU     --}}
                 <div class="col-12 col-md-9 col-sm-8 content">
-                    {{-- @include('layouts.partials.flash') --}}
+                    <div class="content__title text-center">
+                        <h2>@yield('content-title')</h2>
+                    </div>
                     @yield('content')
                     
                 </div>

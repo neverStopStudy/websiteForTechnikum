@@ -3,7 +3,7 @@
 @section('breadcrumbs')
 <div aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('home')}}">Адмінка</a></li>
+        <li class="breadcrumb-item"><a href="{{route('home')}}">Додому</a></li>
         <li class="breadcrumb-item"><a href="{{route('material.index')}}">Навчальні матеріали</a></li>
         <li class="breadcrumb-item active" aria-current="page">Змінення навчального матеріалу</li>
     </ol>

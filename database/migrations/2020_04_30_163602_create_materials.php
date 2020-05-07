@@ -16,9 +16,11 @@ class CreateMaterials extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('subject_id');
+            $table->unsignedInteger('user_id');
             $table->string('name');
             $table->string('text');
             $table->string('link');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->timestamps();
         });
