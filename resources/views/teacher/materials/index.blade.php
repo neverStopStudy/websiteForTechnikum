@@ -3,25 +3,16 @@
 @section('breadcrumbs')
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('home')}}">Додому</a></li>
-        @isset($teacher)
+            <li class="breadcrumb-item"><a href="{{route('home')}}">Додому</a></li>
             <li class="breadcrumb-item active" aria-current="page">Мої навчальні матеріали</li>
-        @else
-            <li class="breadcrumb-item active" aria-current="page">Навчальні матеріали</li>
-        @endisset  
         </ol>
     </div>
 @endsection
 @section("content")
-    @isset($teacher)
-        @section("content-title",'Мої матеріали')
-        <a href="{{route('material.index')}}">Всі матеріали</a>
-    @else
-        @section("content-title",'Всі матеріали')
-    @endisset 
-
+    @section("content-title",'Мої матеріали')
+    
     <div class="admin-btn text-left py-3">
-        <a href="{{route('material.create')}}">
+        <a href="{{route('teacher.material.create')}}">
             <button type="button" class="btn btn-primary">Додати матеріал</button>
         </a>
     </div>
@@ -46,19 +37,17 @@
                 <th>
                     <div class="btn-group">
                         <div class="article__link">
-                            <a href="{{route("material.show", $material->id)}}">
+                            <a href="{{route("teacher.material.show", $material->id)}}">
                                 <button type="button" class="btn btn-success">Дивитись</button>
                             </a>
                         </div>
-
-                        @if(Auth::user()->hasRole('admin')|| $teacher)
                         <div class="article__link">
-                            <a href="{{route('material.edit', $material->id)}}">
+                            <a href="{{route('teacher.material.edit', $material->id)}}">
                                 <button type="button" class="btn btn-warning">Змінити</button>
                             </a>
                         </div>
                         <div class="article__link">
-                            <form action="{{route('material.destroy', $material->id)}}" method="post" >
+                            <form action="{{route('teacher.material.destroy', $material->id)}}" method="get" >
                                 @csrf
                                 @method("DELETE")
                                 <button type="button" class="btn btn-danger admin-delete-btn" >
@@ -66,7 +55,7 @@
                                 </button>
                             </form>
                         </div>
-                        @endif
+                       
                     </div>
                 </th>
             </tr>

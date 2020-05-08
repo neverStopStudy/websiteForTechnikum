@@ -68,11 +68,27 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('group/{group}/user/{user}/delete', 'GroupsController@deleteUserFromGroup')->name('group.delete.user');     
     
         Route::resource('subject', 'SubjectsController');
-        Route::resource('material', 'MaterialsController');
+        
+        Route::group(['group' => 'material','prefix'=> 'material','namespace'=> 'Admin'], function (){
+            Route::get('/', 'MaterialsController@index')->name('admin.material.index');
+            Route::get('/create', 'MaterialsController@create')->name('admin.material.create');
+            Route::post('/store', 'MaterialsController@store')->name('admin.material.store');
+            Route::get('/{id}/show', 'MaterialsController@show')->name('admin.material.show');
+            Route::get('/{id}/edit', 'MaterialsController@edit')->name('admin.material.edit');
+            Route::put('/{id}/update', 'MaterialsController@update')->name('admin.material.update');
+            Route::get('/{id}/delete', 'MaterialsController@destroy')->name('admin.material.destroy');
+        });
+              
     });
-    Route::group(['group' => 'teacher', 'middleware' => 'role:teacher', 'prefix' => 'teacher'], function () {  
-        Route::resource('material', 'MaterialsController');
-        Route::get('/ownmaterials','MaterialsController@ownmaterials')->name('material.ownmaterial');
+    Route::group(['group' => 'teacher', 'middleware' => 'role:teacher', 'prefix' => 'teacher','namespace'=> 'Teacher'], function () {  
+        Route::get('/ownmaterials','MaterialsController@ownmaterials')->name('teacher.material.ownmaterial');
+        Route::get('/', 'MaterialsController@index')->name('teacher.material.index');
+        Route::get('/create', 'MaterialsController@create')->name('teacher.material.create');
+        Route::post('/store', 'MaterialsController@store')->name('teacher.material.store');
+        Route::get('/{id}/show', 'MaterialsController@show')->name('teacher.material.show');
+        Route::get('/{id}/edit', 'MaterialsController@edit')->name('teacher.material.edit');
+        Route::put('/{id}/update', 'MaterialsController@update')->name('teacher.material.update');
+        Route::get('/{id}/delete', 'MaterialsController@destroy')->name('teacher.material.destroy');
     });   
 });
     

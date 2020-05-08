@@ -178,8 +178,8 @@
                                 </button>
                                 <div class="dropdown-menu" x-placement="right-start"
                                     style="position: absolute; transform: translate3d(111px, 0px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="{{route("material.index")}}">Всі матеріали</a>
-                                    <a class="dropdown-item" href="{{route("material.create")}}">Додати матеріал</a>
+                                    <a class="dropdown-item" href="{{route("admin.material.index")}}">Всі матеріали</a>
+                                    <a class="dropdown-item" href="{{route("admin.material.create")}}">Додати матеріал</a>
                                 </div>
                             </li>
                         </ul>
@@ -191,7 +191,9 @@
                 </div>
                 {{--  END SIDE-MENU     --}}
                 <div class="col-12 col-md-9 col-sm-8 content">
-                    {{-- @include('layouts.partials.flash') --}}
+                    <div class="content__title text-center">
+                        <h2>@yield('content-title')</h2>
+                    </div>
                     @yield('content')
                     
                 </div>

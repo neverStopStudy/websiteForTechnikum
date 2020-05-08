@@ -3,8 +3,8 @@
 @section('breadcrumbs')
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('home')}}">Додому</a></li>
-        <li class="breadcrumb-item"><a href="{{route('material.index')}}">Навчальні матеріали</a></li>
+            <li class="breadcrumb-item"><a href="{{route('home')}}">Додому</a></li>
+            <li class="breadcrumb-item"><a href="{{route('teacher.material.ownmaterial')}}">Навчальні матеріали</a></li>
             <li class="breadcrumb-item active" aria-current="page">Додати навчальний матеріал</li>
         </ol>
     </div>
@@ -15,7 +15,7 @@
         <div class="alert alert-danger">{{ $error }}</div>
     @endforeach
 @endif
-    <form action="{{route('material.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('teacher.material.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
         <div class="form-group">

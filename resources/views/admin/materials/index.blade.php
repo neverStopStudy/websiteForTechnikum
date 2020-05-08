@@ -1,0 +1,73 @@
+@extends('admin.layouts.layout')
+@section('breadcrumbs')
+    <div aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">Адмінка</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Навчальні матеріали</li>
+        </ol>
+    </div>
+@endsection
+@section("content")
+    @section("content-title",'Всі матеріали')
+    <div class="admin-btn text-left py-3">
+        <a href="{{route('admin.material.create')}}">
+            <button type="button" class="btn btn-primary">Додати матеріал</button>
+        </a>
+    </div>
+    
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>Предмет</th>
+            <th>Назва</th>
+            <th>Опис</th>
+            <th>Дії</th>
+        </tr>
+        </thead>
+        <tbody>
+        @forelse($materials as $material)
+            <tr>
+                <th scope="row">{{$loop->iteration}}</th>
+                <th>{{mb_substr($material->subject->name, 0, 20)}}</th>
+                <th><a href="{{$material->link}}" >{{mb_substr($material->name, 0, 30)}}</a></th>
+                <th>{{mb_substr($material->text, 0 ,20)}}</th>
+                <th>
+                    <div class="btn-group">
+                        <div class="article__link">
+                            <a href="{{route("admin.material.show", $material->id)}}">
+                                <button type="button" class="btn btn-success">Дивитись</button>
+                            </a>
+                        </div>
+                        <div class="article__link">
+                            <a href="{{route('admin.material.edit', $material->id)}}">
+                                <button type="button" class="btn btn-warning">Змінити</button>
+                            </a>
+                        </div>
+                        <div class="article__link">
+                            <form action="{{route('admin.material.destroy', $material->id)}}" method="get" >
+                                @csrf
+                                @method("DELETE")
+                                <button type="button" class="btn btn-danger admin-delete-btn" >
+                                    <input type="submit" value="Видалити" class="btn admin-delete-input">
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        @empty
+            <tr class="table-warning">
+                <td colspan="5">Немає матеріалів! Додайте матеріал!</td>
+            </tr>
+        @endforelse
+        </tbody>
+    </table>
+    <div class="text-center">
+        {{$materials->links()}}
+    </div>
+        {{--  END MAIN     --}}
+@endsection
+
+
+

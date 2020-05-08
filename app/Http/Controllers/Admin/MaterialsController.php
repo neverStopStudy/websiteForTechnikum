@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\MaterialRequest;
 use App\Material;
@@ -8,6 +8,7 @@ use App\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 
 class MaterialsController extends Controller
 {
@@ -18,7 +19,7 @@ class MaterialsController extends Controller
      */
     public function index()
     {
-        return view('materials.index', ['materials' => Material::with('subject')->paginate(5)]);
+        return view('admin.materials.index', ['materials' => Material::with('subject')->paginate(5)]);
     }
 
     /**
@@ -28,7 +29,7 @@ class MaterialsController extends Controller
      */
     public function create()
     {
-        return view('materials.create', ['subjects' => Subject::all()]);
+        return view('admin.materials.create', ['subjects' => Subject::all()]);
     }
 
     /**
@@ -50,7 +51,7 @@ class MaterialsController extends Controller
             'link' =>  $path,
         ]);
 
-        return redirect()->route('material.index');
+        return redirect()->route('admin.material.index');
     }
 
     /**
@@ -61,7 +62,7 @@ class MaterialsController extends Controller
      */
     public function show(Material $material)
     {
-        return view('materials.show', compact('material'));
+        return view('admin.materials.show', compact('material'));
     }
 
     /**
@@ -70,10 +71,11 @@ class MaterialsController extends Controller
      * @param  \App\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function edit(Material $material)
+    public function edit($id)
     {
+        $material = Material::find($id);
         $subjects = Subject::all();
-        return view('materials.edit', compact('material','subjects'));
+        return view('admin.materials.edit', compact('material','subjects'));
     }
 
     /**
@@ -83,12 +85,12 @@ class MaterialsController extends Controller
      * @param  \App\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function update(MaterialRequest $request, Material $material)
+    public function update(MaterialRequest $request, $id)
     {
-        $material = Material::find($material->id);
+        $material = Material::find($id);
         $material->fill($request->all());
         $material->save();
-        return redirect()->route('material.index');
+        return redirect()->route('admin.material.index');
     }
 
     /**
@@ -97,17 +99,10 @@ class MaterialsController extends Controller
      * @param  \App\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Material $material)
+    public function destroy($id)
     {
-        Material::destroy($material->id);
-        return redirect()->route('material.index');
-    }
-
-    public function ownmaterials(){        
-        return view('materials.index', [
-            'materials' => Auth::user()->materials()->with('subject')->paginate(5),
-            'teacher' => true
-            ]);
+        Material::destroy($id);
+        return redirect()->route('admin.material.index');
     }
     
 }

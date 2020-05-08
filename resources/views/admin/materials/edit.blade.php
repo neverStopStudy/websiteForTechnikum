@@ -1,21 +1,22 @@
-@extends("layouts.app")
+@extends('admin.layouts.layout')
 
 @section('breadcrumbs')
 <div aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('home')}}">Додому</a></li>
-        <li class="breadcrumb-item"><a href="{{route('material.index')}}">Навчальні матеріали</a></li>
+        <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">Адмінка</a></li>
+        <li class="breadcrumb-item"><a href="{{route('admin.material.index')}}">Навчальні матеріали</a></li>
         <li class="breadcrumb-item active" aria-current="page">Змінення навчального матеріалу</li>
     </ol>
 </div>
 @endsection
 @section("content")
-@if ($errors->any()) 
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
-@endif
-    <form action="{{route('material.update',$material->id)}}" method="post" enctype="multipart/form-data">
+    @section("content-title",'Змінити матеріал')
+    @if ($errors->any()) 
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
+    <form action="{{route('admin.material.update', $material->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method("PUT")
         <div class="form-group">
@@ -31,14 +32,17 @@
             <label for="select">Оберіть предмет</label>
             <select class="custom-select" name="subject_id" id="select">
                 @foreach ($subjects as $subject)
-                @if($subject->id === $material->subject_id)
-                    <option value="{{$subject->id}}" selected >{{$subject->name}}</option>
-                @else
-                    <option value="{{$subject->id}}">{{$subject->name}}</option>
-                @endif
-                    
+                    @if($subject->id === $material->subject_id)
+                        <option value="{{$subject->id}}" selected >{{$subject->name}}</option>
+                    @else
+                        <option value="{{$subject->id}}">{{$subject->name}}</option>
+                    @endif                
                 @endforeach
             </select>
+        </div>
+        <div class="form-group">
+            <label>Загрузити матеріал</label>
+            <input type="file" name="link" class="form-control-file" value="{{$request->link ?? ''}}" >
         </div>
         <div class="form-group">
             <button class="form-control" type="submit" name="submit"> Добавить </button>

@@ -81,7 +81,7 @@
                                     </a>
                                     @endadmin
                                     @teacher
-                                    <a class="dropdown-item" href="{{ route('material.ownmaterial') }}">
+                                    <a class="dropdown-item" href="{{ route('teacher.material.ownmaterial') }}">
                                         {{ __('Мої матеріали') }}
                                     </a>
                                     @endteacher
