@@ -23,7 +23,7 @@
             <th>#</th>
             <th>Предмет</th>
             <th>Назва</th>
-            <th>Предмет</th>
+            <th>Опис</th>
             <th>Дії</th>
         </tr>
         </thead>
@@ -33,7 +33,7 @@
                 <th scope="row">{{$loop->iteration}}</th>
                 <th>{{mb_substr($material->subject->name, 0, 20)}}</th>
                 <th><a href="{{$material->link}}" >{{mb_substr($material->name, 0, 30)}}</a></th>
-                <th>{{$material->subject->name}}</th>
+                <th>{{$material->text}}</th>
                 <th>
                     <div class="btn-group">
                         <div class="article__link">

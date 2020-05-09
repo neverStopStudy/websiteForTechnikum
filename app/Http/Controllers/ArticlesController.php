@@ -13,9 +13,13 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::find($id);
+        $article->views++;
+        $article->save();
+        
         $imgs = $article->images()->get();
-
-        return view('admin.articles.show', ['article' => $article, 'imgs' => $imgs]);
+        $comments = $article->comments;
+        // Article::find($article->id)->comments
+        return view('admin.articles.show', compact('article','imgs','comments'));
     }
 
     public function welcome()
@@ -62,6 +66,7 @@ class ArticlesController extends Controller
                 $index++;
             }
         } 
+
         return redirect()->route('welcome');
     }
 
@@ -78,6 +83,7 @@ class ArticlesController extends Controller
         $article = Article::find($id);
         $article->fill($request->all());
         $article->save();
+
         return redirect()->route('admin.article.index');
     }
 
@@ -85,6 +91,7 @@ class ArticlesController extends Controller
     {
         Article::find($id)->images()->delete();
         Article::destroy($id);
+
         return redirect()->route('admin.article.index');
     }
 }

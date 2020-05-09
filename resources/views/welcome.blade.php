@@ -19,7 +19,7 @@
         <h2>Останні новини</h2>
     </div>
     @foreach($articles as $article)
-    
+    {{-- {{dd($article)}} --}}
         <div class="article">
             <div class="row d-flex ">
                 <div class="article__img col-12 col-md-6">
@@ -38,6 +38,14 @@
                     <div class="article__descr">
                         <p>{{$article->text}}</p>
                     </div>
+                    <div class="py-3">
+                        <div class="article__date ">
+                            <p>Переглядів: {{$article->views}}</p>
+                        </div>
+                        <div class="article__date">
+                            <p>Дата публікації: {{$article->created_at}}</p>
+                        </div>     
+                    </div>               
                     <div class="btn-group btn-group-sm">
                         <div class="article__link">
                             @admin

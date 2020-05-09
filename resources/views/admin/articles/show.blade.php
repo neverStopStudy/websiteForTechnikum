@@ -67,7 +67,7 @@
             </div>
         </article>
         <p>Коментарі</p>
-        @forelse(App\Article::find($article->id)->comments as $comment)
+        @forelse($comments as $comment)
             <div class="card comment">
                 <div class="card-body">
                     <h4 class="comment-author card-title">
