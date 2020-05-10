@@ -16,18 +16,23 @@
     <form action="{{route('admin.user.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="formGroupExampleInput">Имя</label>
-            <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Введите имя"
+            <label for="name">Ім'я</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Введите имя"
         value="{{$user->name ?? ''}}">
         </div>
         <div class="form-group">
-            <label for="formGroupExampleInput">E-mail</label>
-            <input type="email" name="email" class="form-control" id="formGroupExampleInput" placeholder="Введите email"
+            <label for="surname">Прізвище</label>
+            <input type="text" name="surname" class="form-control" id="surname" placeholder="Введите имя"
+        value="{{$user->name ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Введите email"
         value="{{$user->email ?? ''}}">
         </div>
         <div class="form-group">
-            <label for="formGroupExampleInput">Пароль</label>
-            <input type="password" name="password" class="form-control" id="formGroupExampleInput" placeholder="Введите пароль"
+            <label for="password">Пароль</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Введите пароль"
         value="{{$user->password ?? ''}}">
         </div>
         <div class="form-group">

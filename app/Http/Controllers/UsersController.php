@@ -44,11 +44,11 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'surname' => $request->surname,
         ]);
         
         $user->groups()->attach($request->group_id);
