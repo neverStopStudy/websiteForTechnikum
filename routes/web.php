@@ -11,39 +11,28 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome')->name('welcome');
-//});
-
-
-//Route::group(['middleware' => 'role:project-manager'], function() {
-//    Route::get('/dashboard', function() {
-//        return 'Добро пожаловать, Менеджер проекта';
-//    });
-//});
-use App\User;
 
 // use Symfony\Component\Routing\Route;
 use Illuminate\Support\Facades\Route;
 
-Route::get('mail', function () {
-//    $user = Auth::user();
-//    dd(auth()->user()->hasRole('admin'));
-//    dd(User::with('roles')->where('roles','admin')->get());
+// Route::get('mail', function () {
+// //    $user = Auth::user();
+// //    dd(auth()->user()->hasRole('admin'));
+// //    dd(User::with('roles')->where('roles','admin')->get());
 
-//    dd(User::with('roles')->where('roles','admin')->get());
-//    $user->notify(new App\Notifications\NewUser($user));
-//    dd(auth()->user()->unreadNotifications);
+// //    dd(User::with('roles')->where('roles','admin')->get());
+// //    $user->notify(new App\Notifications\NewUser($user));
+// //    dd(auth()->user()->unreadNotifications);
 
-    return view('welcome')->name('welcome');
-});
+//     return view('welcome')->name('welcome');
+// });
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['group' => 'admin', 'middleware' => 'role:admin', 'prefix' => 'admin'], function () {
-        Route::get('/', 'ArticlesController@welcome')->name('welcome');
+        // Route::get('/', 'ArticlesController@welcome')->name('welcome');
         Route::get('/articles', 'ArticlesController@index')->name('admin.article.index');
         Route::get('/article/create', 'ArticlesController@create')->name('admin.article.create');
         Route::post('/article/store', 'ArticlesController@store')->name('admin.article.store');
@@ -92,7 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
     });   
 });
     
-
+Route::resource('subject', 'SubjectsController');
 
 Route::get('download/{path}', 'DownloadFilesController@download')->name('download');
 
