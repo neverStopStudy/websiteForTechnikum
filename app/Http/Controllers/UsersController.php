@@ -9,6 +9,7 @@ use App\Role;
 use App\Permission;
 use Illuminate\Support\Facades\Storage;
 use App\Image;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -98,8 +99,11 @@ class UsersController extends Controller
 
         $roles = Role::all();
         $permissions = Permission::all();
-        return view("admin.users.edit", compact('user','roles','permissions','groups'));
-        
+        if(Auth::user()->hasRole('admin')){
+            return view("admin.users.edit", compact('user','roles','permissions','groups'));
+        } else {
+            return view("user.users.edit", compact('user','groups'));
+        }
     }
 
     /**

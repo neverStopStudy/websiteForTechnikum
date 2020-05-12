@@ -85,10 +85,10 @@ Route::resource('subject', 'SubjectsController');
 
 Route::get('download/{path}', 'DownloadFilesController@download')->name('download');
 
-Route::post('/user/store', 'UsersController@store')->name('admin.user.store');
-Route::get('/user/{id}/show', 'UsersController@show')->name('admin.user.show');
+Route::post('/user/store', 'UsersController@store')->name('user.store');
+Route::get('/user/{id}/show', 'UsersController@show')->name('user.show');
 Route::get('/user/{id}/edit', 'UsersController@edit')->name('user.edit');
-Route::put('/user/{id}/update', 'UsersController@update')->name('admin.user.update');
+Route::put('/user/{id}/update', 'UsersController@update')->name('user.update');
 Route::post('/comment/store', 'CommentsController@store')->name('comment.store')->middleware('auth');
 
 Route::get('/', 'ArticlesController@welcome')->name('user.article.index');

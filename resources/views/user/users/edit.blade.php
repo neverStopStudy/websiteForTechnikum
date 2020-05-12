@@ -1,30 +1,25 @@
 @extends("layouts.app")
-<style>
-    .article-imgs img{
-        width: 100%;
-    }
-</style>
-@section("side-block")
-    <h2>Змінити користувача</h2>
-{{--    <div class="article-imgs">--}}
-{{--        @forelse($article->images as $image)--}}
-{{--            <img src="{{$image->link}}" alt="article_img">--}}
-{{--        @empty--}}
-{{--            <p>Нет фото у Статьи</p>--}}
-{{--        @endforelse--}}
-{{--    </div>--}}
-@endsection
 
+@section('breadcrumbs')
+    <div aria-label="breadcrumb">
+        <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('home')}}">Особистий кабінет</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Змінити користувача</li>
+        </ol>
+    </div>
+@endsection
 @section("content")
-    <form action="{{route('admin.user.update',$user->id)}}" method="post" enctype="multipart/form-data">
+<div class="content__title text-center">
+    <h2>Змінити користувача - {{$user->name}}</h2>
+</div>
+    <form action="{{route('user.update', $user->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method("PUT")
         <div class="form-group">
-            <label for="formGroupExampleInput">Имя</label>
-            <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Example input"
+            <label for="name">ФІО</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Введіть ФІО"
         value="{{$user->name}}">
         </div>
-
         <div class="form-group">
             <label>Загрузить фото</label>
             <input type="file" name="imgs[]" class="form-control-file" multiple >
