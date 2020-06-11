@@ -21,7 +21,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles','permissions')->paginate(5);
+        $users = User::with('roles')->paginate(5);
         return view('admin.users.index', compact('users'));
     }
 
@@ -49,7 +49,6 @@ class UsersController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'surname' => $request->surname,
         ]);
         
         $user->groups()->attach($request->group_id);

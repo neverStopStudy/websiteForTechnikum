@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends('admin.layouts.layout')
 
 @section("breadcrumbs")
     <div aria-label="breadcrumb">
@@ -10,16 +10,15 @@
     </div>
 @endsection
 @section("content")
-<div class="content__title text-center">
-<h2>Перегляд групи {{$group->name}}</h2>
-</div>
+@section('content-title','Перегляд групи ' . $group->name)
+
 <div class="btn-group py-3">
-    <div class="article__link">
+    <div class="btn-group__control">
         <a href="{{route('group.edit', $group)}}">
             <button type="button" class="btn btn-warning">Змінити групу</button>
         </a>
     </div>
-    <div class="article__link">
+    <div class="btn-group__control">
         <form action="{{route('group.destroy', $group)}}" method="post">
             @csrf
             @method("DELETE")
@@ -59,12 +58,12 @@
                             <th>{{$student->email}}</th>
                             <th>
                                 <div class="btn-group">
-                                    <div class="article__link">
+                                    <div class="btn-group__control">
                                         <a href="{{route("admin.user.show", $student->id)}}">
                                             <button type="button" class="btn btn-success">Дивитись</button>
                                         </a>
                                     </div>
-                                    <div class="article__link">
+                                    <div class="btn-group__control">
                                         <form action="{{route('group.delete.user', ['group' => $group ,'user' => $student])}}" method="get">
                                             @csrf
                                             @method("DELETE")
@@ -102,22 +101,17 @@
                             <th>{{$subject->name}}</th>
                             <th>
                                 <div class="btn-group">
-                                    <div class="article__link">
-                                        <a href="{{route("group.show", $group->id)}}">
+                                    <div class="btn-group__control">
+                                        <a href="{{route('subject.show', $subject->id)}}">
                                             <button type="button" class="btn btn-success">Дивитись</button>
                                         </a>
                                     </div>
-                                    <div class="article__link">
-                                        <a href="{{route('group.edit', $group->id)}}">
-                                            <button type="button" class="btn btn-warning">Змінити</button>
-                                        </a>
-                                    </div>
-                                    <div class="article__link">
-                                        <form action="{{route('group.destroy', $group->id)}}" method="get">
+                                    <div class="btn-group__control">
+                                        <form action="{{route('group.delete.subject', ['group' => $group ,'subject' => $subject])}}" method="get">
                                             @csrf
                                             @method("DELETE")
                                             <button type="button" class="btn btn-danger admin-delete-btn">
-                                                <input type="submit" value="Видалити" class="btn admin-delete-input">
+                                                <input type="submit" value="Видалити з групи" class="btn admin-delete-input">
                                             </button>
                                         </form>
                                     </div>

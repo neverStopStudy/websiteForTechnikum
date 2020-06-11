@@ -23,48 +23,44 @@
 </style>
 @section('content')
 <div class="container">
-    
-        <div class="text-center">
-            <h2>Профиль</h2>
+    @section('content-title','Адміністраторська панель')
+        <div class="row text-center">
+            <div class="col-sm-4">
+                <div class="jumbotron">
+                    Cтатей: {{ $articles }}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="jumbotron">
+                    Коментарів: {{ $comments }}
+                </div>
+            </div> 
+            <div class="col-sm-4">
+                <div class="jumbotron">
+                    Користувачів: {{ $materials }}
+                </div>
+            </div> 
         </div>
         <div class="row text-center">
             <div class="col-sm-4">
                 <div class="jumbotron">
-                    Cтатей {{ $articles }}
+                    Груп: {{ $groups }}
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="jumbotron">
-                    Материалов {{ $materials }}
+                    Предметів: {{ $subjects }}
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="jumbotron">
-                Посетителей 0
+                    Матеріалів: {{ $materials }}
                 </div>
             </div>
-        
-</div>
-
+        </div>
 
        
-            
-            <div class="card">
-                <div class="card-header">
-                    Уведомления
-                </div>
-                <div class="card-body" style="padding: 0">
-                    <ul class="list-group list-group-flush">
-                        @foreach($notifications as $notification)
-                            <li class="list-group-item">
-                                @if($notification->data['message'])
-                                {{$notification->data['message'] . PHP_EOL . $notification->created_at->diffForHumans()}}
-                                @endif
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+        
         </div>
     
 @endsection

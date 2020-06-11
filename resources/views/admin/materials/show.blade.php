@@ -11,6 +11,7 @@
 @endsection
 @section("content")
     @section("content-title",'Перегляд матеріалу')
+    {{-- {{dd($material)}} --}}
     <div class="material">
         <div class="material__title">
             <h2> {{$material->name}}</h2>
@@ -25,7 +26,12 @@
         </div>
         <div class="material__link">
             <span>
-                <a href="{{route('download', $material->link)}}" download>Завантажити</a>
+                {{-- {{response()->download(public_path($material->link))}} --}}
+                {{-- {{dd($material->link)}} --}}
+                {{-- <a href="{{route('admin.material.index')}}" >Завантажити</a> --}}
+                <a href="{{route('download', $material->link)}}">
+                    <button type="button" class="btn btn-warning">Завантажити</button>
+                </a>
             </span>
         </div>
     </div>

@@ -30,21 +30,22 @@
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
                 <th>{{mb_substr($material->subject->name, 0, 20)}}</th>
-                <th><a href="{{$material->link}}" >{{mb_substr($material->name, 0, 30)}}</a></th>
+                {{-- <th><a href="{{$material->link}}" >{{mb_substr($material->name, 0, 30)}}</a></th> --}}
+                <th>{{mb_substr($material->name, 0, 30)}}</th>
                 <th>{{mb_substr($material->text, 0 ,20)}}</th>
                 <th>
                     <div class="btn-group">
-                        <div class="article__link">
+                        <div class="btn-group__control">
                             <a href="{{route("admin.material.show", $material->id)}}">
                                 <button type="button" class="btn btn-success">Дивитись</button>
                             </a>
                         </div>
-                        <div class="article__link">
+                        <div class="btn-group__control">
                             <a href="{{route('admin.material.edit', $material->id)}}">
                                 <button type="button" class="btn btn-warning">Змінити</button>
                             </a>
                         </div>
-                        <div class="article__link">
+                        <div class="btn-group__control">
                             <form action="{{route('admin.material.destroy', $material->id)}}" method="get" >
                                 @csrf
                                 @method("DELETE")

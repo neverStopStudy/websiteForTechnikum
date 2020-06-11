@@ -155,5 +155,189 @@ footer{
     #main-nav{
         display: flex;
     }
-
 }
+
+
+    /*Start MENu */
+    .content1{
+        background-color:#ebfaff;
+        display:flex;
+        justify-content: space-between;
+        padding:5px;  
+    }
+    .left-side{
+         width:200px;
+         height:auto; 
+         display: flex;
+        flex-direction: column;
+        
+    }
+    .content-wrap{
+        border-radius:0 0 5px 5px;
+        margin-bottom:5px ;  
+    }
+    .block-title{
+        //background:url(../img/4.gif) no-repeat;
+        height:34px;
+        width:200px;
+        color:#fff;   
+    }
+    .block-title>p{
+        
+        margin:5% 0 5% 18%;  	 
+    }
+    .block-content{
+        border-radius:5px; 
+        background-color:#fff;
+        margin:5px;
+        padding:0 5px;   
+    }
+    .content-main{
+        margin:5px 0;
+    }
+    .content-menu{
+        display:flex;
+        flex-direction: column;
+        padding: 5px;
+    }
+    .content-main>ul>li{
+        padding:5px 0 5px 0; 
+        list-style:none;
+        font-size: 12pt;
+        font-weight:bold;
+        text-align:left;
+        z-index: 999;
+    }
+    .content-main>ul>li::before{
+        //content: url(../img/3.gif);
+        margin:0 5px 0 0;
+    }
+    .content-main>ul>li>a{
+        text-decoration:none;
+    }
+    .main-content{
+        background-color:#fff; 
+        width:67%;
+         
+         display: flex;
+        flex-direction: column;
+         margin:0 5px;    
+    }
+    .right-side{
+        width:200px;
+         display: flex;
+        flex-direction: column;
+         
+    }
+    .drop-down-list{
+        position:relative; 
+    }
+    .drop-down-list>a{
+        color:black;
+    }
+    .drop-down-list::after,.markup::after{
+        content:" ";
+        position:absolute;
+        border:5px solid black;
+        border-color:transparent transparent transparent black ;
+        top:0.7em;
+        right:0;
+        transition:0.5s all;       
+    }
+    .content-main>ul>li>a:hover{
+        color: black;
+    }
+    .list>a{
+        color: #4f98bc;
+    }
+    .first-element>a{
+        color: #79bd11;
+    }
+    .drop-list,.drop-list2,.drop-list3{
+        width:200px; 
+        top:-9999em;
+        padding: 0 5px 0 5px;
+        list-style:none; 
+        position:absolute;
+        opacity:0; 
+        left:100%;
+        background-color:#cad9ec;
+        font-family:tahoma,arial,helvetica,sans-serif;
+        font-size:  12px;
+        font-weight: bold;
+        transition:0.3s opacity;
+    }
+    .drop-list>li,.drop-list2>li,.drop-list3>li{
+        padding:6px; 
+    }
+    .drop-down-list:hover .drop-list,.drop-list>li:hover .drop-list2,.drop-list>li:hover .drop-list3{
+        opacity:1;
+        top:0; 
+    } 
+    .drop-list>li>a,.drop-list2>li>a,.drop-list3>li>a{
+        text-decoration:none;
+        color:black; 
+    
+    }
+    .drop-list>li:hover,.drop-list2>li:hover,.drop-list3>li:hover{
+        background: linear-gradient( to bottom ,#ebf3fd,#d9e8fb); 
+    }
+    .drop-down-list:hover::after{
+        transform:scaleX(-1); 
+    }
+    .markup1::after{
+        content:" ";
+        position:absolute;
+        border:5px solid black;
+        border-color:transparent transparent transparent black ;
+        top:3em;
+        right:0;
+        transition:0.5s all;       
+    }
+    /*End menu*/
+    .footer__title{
+        color: #FFF;
+    }
+
+    .btn-group__control{
+        margin-right: 5px;
+    }
+    .btn-group-vertical > .btn-group__control{
+        margin-bottom: 5px;
+    }
+
+    .main-wrapper{
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
+
+    .article-text{
+        margin-bottom: 10px;
+        color:black;
+        text-indent: 50px;
+    }
+    .article-author{
+        margin-bottom: 10px;
+    }
+    .content__title {
+        color: black;
+    }
+
+    .comment__wrapper{
+        padding: 10px;
+        background-color: whitesmoke;
+        border-radius: 5px;
+    }
+    
+    .comment__btn{
+        width: 150px;
+    }
+
+    .carousel{
+        margin-bottom: 10px;
+    }
+
+    .color-black{
+        color:black;
+    }

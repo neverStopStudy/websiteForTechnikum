@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> Курахівська філія ПЄСТ
+    <title> Курахівська філія
         Дніпровського державного технікуму енергетичних та інформаційних технологій </title>
 
     <!-- Scripts -->
@@ -37,7 +37,7 @@
                     <div class="col-8 d-flex justify-content-center flex-column col-center">
                         <div class="row">
                             <div class="header__title">
-                                <p class="text-center">Курахівська філія ПЄСТ
+                                <p class="text-center">Курахівська філія
                                     Дніпровського державного технікуму енергетичних та інформаційних технологій</p>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{mb_substr(Auth::user()->name, 0, 20) . "..."}}<span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @admin
@@ -109,12 +109,35 @@
                     
                 {{--  START SIDE-MENU     --}}
                 <div class="col-12 col-md-3 col-sm-4 side-block">
-                    <div class="side-menu">
+                    <div class="side-menu text-center color-black">
                         <h3>Меню сайта</h3>
                     </div>
-                        <ul class="list-group">
-                            <li class="list-group-item active">Главная</li>
-                            <li class="list-group-item dropdown-side-block">
+                    <div class="content-wrap">
+                        <!--START WRAPPER1-->
+                        <div class="block-content">
+                            <div class="content-main">
+                                <ul class="content-menu">
+                                    <li class="first-element"><a href="/" >Головна сторінка</a></li>
+                                    </li>
+                                        <li class="list"><a href="{{route("admin.article.index")}}">Статті</a></li>
+                                        <li class="list"><a href="{{route("admin.users.index")}}">Користувачі</a></li>
+                                        <li class="list"><a href="{{route("role.index")}}">Ролі</a></li>
+                                        <li class="list"><a href="{{route("group.index")}}">Групи</a></li>
+                                        <li class="list"><a href="{{route("subject.index")}}">Предмети</a></li>
+                                        <li class="list"><a href="{{route("admin.material.index")}}">Матеріали</a></li>
+                                    </ul>
+                                </ul>
+                                </div>
+                            </div>
+                        </div>                        
+                        <!--END WRAPPER-->	
+                    </div>
+                                            
+                        {{--  END SIDE-MENU     --}}
+    
+                        {{-- <ul class="list-group">
+                            <li class="list-group-item active">Главная</li> --}}
+                            {{-- <li class="list-group-item dropdown-side-block">
                                 <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                     Cтатьи
@@ -125,8 +148,8 @@
                                     <a class="dropdown-item" href="{{route('admin.article.create')}}">Добавить статью</a>
                                     <a class="dropdown-item" href="{{route('home')}}">Статистика</a>
                                 </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
+                            </li> --}}
+                            {{-- <li class="list-group-item dropdown-side-block">
                                 <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                     Користувачі
@@ -137,8 +160,8 @@
                                     <a class="dropdown-item" href="{{route('admin.user.create')}}">Додати користувача</a>
                                     <a class="dropdown-item" href="{{route('home')}}">Статистика</a>
                                 </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
+                            </li> --}}
+                            {{-- <li class="list-group-item dropdown-side-block">
                                 <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                     Роли
@@ -148,8 +171,8 @@
                                     <a class="dropdown-item" href="{{route("role.index")}}">Всі роли</a>
                                     <a class="dropdown-item" href="{{route('role.create')}}">Додати роль</a>
                                 </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
+                            </li> --}}
+                            {{-- <li class="list-group-item dropdown-side-block">
                                 <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                     Групи
@@ -159,8 +182,8 @@
                                     <a class="dropdown-item" href="{{route("group.index")}}">Всі групи</a>
                                     <a class="dropdown-item" href="{{route("group.create")}}">Додати групу</a>
                                 </div>
-                            </li>
-                            <li class="list-group-item dropdown-side-block">
+                            </li> --}}
+                            {{-- <li class="list-group-item dropdown-side-block">
                                 <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         Предмети
@@ -170,8 +193,8 @@
                                     <a class="dropdown-item" href="{{route("subject.index")}}">Всі предмети</a>
                                     <a class="dropdown-item" href="{{route("subject.create")}}">Додати предмет</a>
                                 </div>
-                            </li>
-                             <li class="list-group-item dropdown-side-block">
+                            </li> --}}
+                             {{-- <li class="list-group-item dropdown-side-block">
                                 <button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         Матеріали
@@ -182,20 +205,17 @@
                                     <a class="dropdown-item" href="{{route("admin.material.create")}}">Додати матеріал</a>
                                 </div>
                             </li>
-                        </ul>
-                        <div class="card settings">
-                            <div class="card-body">
-                                <a href="{{route('user.edit', Auth::user()->id)}}">Настройки профиля</a>
-                            </div>
-                        </div>
-                </div>
+                        </ul> --}}
+                        
+                
                 {{--  END SIDE-MENU     --}}
                 <div class="col-12 col-md-9 col-sm-8 content">
                     <div class="content__title text-center">
                         <h2>@yield('content-title')</h2>
                     </div>
-                    @yield('content')
-                    
+                    <div class="main-wrapper">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
             @yield('pagination')
@@ -204,8 +224,28 @@
     <footer>
         <div class="navbar-fixed-bottom row-fluid">
             <div class="navbar-inner">
-                <div class="container">
-                    <p class="text-center">Made by Roman Winogradow 2020 year</p>
+                <div class="container py-2">
+                    
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-4">
+                            <p class="text-center">
+                                <span class="footer__title">Aдреса:</span> Донецька обл., Мар'їнський р-н, м.Курахове, пр-т Соборний, буд.14  
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <p class="text-center">
+                                <span class="footer__title">E-mail:</span> kpest@ukr.net  
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <p class="text-center">
+                                <span class="footer__title">Тел.:</span> (06278) 3-22-07 
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-center">Курахівській філія ПЄСТ Дніпровського державного технікуму  
+                            енергетичних та інформаційних технологій &copy; 2020 рік
+                    </p>
                 </div>
             </div>
         </div>

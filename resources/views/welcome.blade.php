@@ -15,11 +15,11 @@
     @endadmin
     
     {{--  START MAIN     --}}
-    <div class="main__title text-center">
+    {{-- <div class="main__title text-center">
         <h2>Останні новини</h2>
-    </div>
+    </div> --}}
+    @section('content-title','Останні новини')
     @foreach($articles as $article)
-    {{-- {{dd($article)}} --}}
         <div class="article">
             <div class="row d-flex ">
                 <div class="article__img col-12 col-md-6">
@@ -32,11 +32,11 @@
                     </a>
                 </div>
                 <div class="article__text col-12 col-md-6">
-                    <div class="article__title">
-                        <h2>{{$article->title}}</h2>
+                    <div class="article__title color-black">
+                        <h3>{{$article->title}}</h3>
                     </div>
                     <div class="article__descr">
-                        <p>{{$article->text}}</p>
+                        <p>{{mb_substr($article->text, 0, 100) . "..."}}</p>
                     </div>
                     <div class="py-3">
                         <div class="article__date ">
@@ -53,18 +53,18 @@
                             @else
                                 <a href="{{route("user.article.show", $article->id)}}">
                             @endadmin
-                                <button type="button" class="btn btn-success">Читать</button>
+                                <button type="button" class="btn btn-success">Читати</button>
                             </a>
                         </div>
                         @admin
                         <a href="{{route('admin.article.edit', $article->id)}}">
-                            <button type="button" class="btn btn-warning">Изменить</button>
+                            <button type="button" class="btn btn-warning">Змінити</button>
                         </a>
                         <form action="{{route('admin.article.destroy', $article->id)}}" method="get">
                             @csrf
                             @method("DELETE")
                             <button type="button" class="btn btn-danger admin-delete-btn">
-                                <input type="submit" value="Удалить" class="btn admin-delete-input">
+                                <input type="submit" value="Видалити" class="btn admin-delete-input">
                             </button>
                         </form>
                         @endadmin

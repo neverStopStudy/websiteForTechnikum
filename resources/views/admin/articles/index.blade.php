@@ -1,27 +1,19 @@
-{{--@extends("admin.layouts.layout")--}}
-@extends("layouts.app")
-<style>
-    .article__link {
-        margin-right: 5px;
-    }
-</style>
-@section("side-block")
-    <div class="col-sm-3 col-12 side-block">
-        <div class="side-menu">
-            <h3>Меню сайта</h3>
-        </div>
-        <ul class="list-group">
-            <li class="list-group-item active">Главная</li>
-            <li class="list-group-item"><a href="#">Інформація про технікум</a></li>
-            <li class="list-group-item"><a href="#">Виховання</a></li>
-            <li class="list-group-item"><a href="#">Абітуріенту</a></li>
-            <li class="list-group-item"><a href="#">Контакти</a></li>
-            <li class="list-group-item"><a href="#">Інформація</a></li>
-        </ul>
+@extends('admin.layouts.layout')
+@section('breadcrumbs')
+    <div aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">Адмінка</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Статті </li>
+        </ol>
     </div>
 @endsection
 @section("content")
-    <div class="col-12 col-sm-9 content">
+    @section('content-title','Всі статті')
+    <div class="admin-btn text-left py-3">
+        <a href="{{route('admin.article.create')}}">
+            <button type="button" class="btn btn-primary">Додати статтю</button>
+        </a>
+    </div>  
         <table class="table">
             <thead class="thead-light">
             <tr>
@@ -30,7 +22,6 @@
                 <th>Текст</th>
                 <th>Перегляди</th>
                 <th>Комментарi</th>
-                <th>Статус</th>
                 <th>Дата</th>
                 <th>Дії</th>
             </tr>
@@ -43,25 +34,20 @@
                     <th>{{mb_substr($article->text, 0, 30) . "..."}}</th>
                     <th>{{$article->views}}</th>
                     <th>{{$article->comments->count()}}</th>
-                    <th>
-                        @if($article->status) Вкл
-                        @else Выкл
-                        @endif
-                    </th>
                     <th>{{$article->created_at}}</th>
                     <th>
                         <div class="btn-group-vertical">
-                            <div class="article__link">
+                            <div class="btn-group__control">
                                 <a href="{{route("admin.article.show", $article->id)}}">
                                     <button type="button" class="btn btn-success">Дивитись</button>
                                 </a>
                             </div>
-                            <div class="article__link">
+                            <div class="btn-group__control">
                                 <a href="{{route('admin.article.edit', $article->id)}}">
                                     <button type="button" class="btn btn-warning">Змінити</button>
                                 </a>
                             </div>
-                            <div class="article__link">
+                            <div class="btn-group__control">
                                 <form action="{{route('admin.article.destroy', $article->id)}}" method="get">
                                     @csrf
                                     @method("DELETE")
@@ -82,8 +68,6 @@
             </tbody>
         </table>
         {{--  END MAIN     --}}
-    </div>
-    </div>
 @endsection
 
 

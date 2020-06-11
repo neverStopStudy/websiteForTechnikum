@@ -1,30 +1,27 @@
-{{--@extends("admin.layouts.layout")--}}
-@extends("layouts.app")
+@extends('admin.layouts.layout')
 
 @section('breadcrumbs')
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('home')}}">Адмінка</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">Адмінка</a></li>
             <li class="breadcrumb-item active" aria-current="page">Всі користувачі</li>
         </ol>
     </div>
 @endsection
 @section("content")
-    <div class="content__title text-center">
-        <h2>Всі користувачі</h2>
-    </div>
+@section('content-title','Всі користувачі')
+
     <div class="admin-btn text-left py-3">
         <a href="{{route('admin.user.create')}}">
-            <button type="button" class="btn btn-primary">Додати користувачя</button>
+            <button type="button" class="btn btn-primary">Додати користувача</button>
         </a>
     </div>        
     <table class="table">
         <thead class="thead-light">
         <tr>
             <th>#</th>
-            <th>Имя</th>
+            <th>ПІБ</th>
             <th>Роль</th>
-            <th>Разрешения</th>
             <th>Дії</th>
         </tr>
         </thead>
@@ -35,31 +32,24 @@
                 <th>{{$user->name}}</th>
                 <th>
                     @forelse($user->roles as $role)
-                        {{$role->name . ", "}}
+                        {{$role->name}}
                     @empty
-                        Нет роли! Добавьте роль!
-                    @endforelse
-                </th>
-                <th>
-                    @forelse($user->permissions as $permission)
-                        {{$permission->name . ", "}}
-                    @empty
-                        Нет разрешения! Добавьте разрешение!
+                        -
                     @endforelse
                 </th>
                 <th>
                     <div class="btn-group">
-                        <div class="article__link">
+                        <div class="btn-group__control">
                             <a href="{{route("admin.user.show", $user->id)}}">
                                 <button type="button" class="btn btn-success">Дивитись</button>
                             </a>
                         </div>
-                        <div class="article__link">
+                        <div class="btn-group__control">
                             <a href="{{route('admin.user.edit', $user->id)}}">
                                 <button type="button" class="btn btn-warning">Змінити</button>
                             </a>
                         </div>
-                        <div class="article__link">
+                        <div class="btn-group__control">
                             <form action="{{route('admin.user.destroy', $user->id)}}" method="get">
                                 @csrf
                                 @method("DELETE")

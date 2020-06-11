@@ -16,13 +16,8 @@
     <form action="{{route('admin.user.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="name">Ім'я</label>
+            <label for="name">ПІБ</label>
             <input type="text" name="name" class="form-control" id="name" placeholder="Введите имя"
-        value="{{$user->name ?? ''}}">
-        </div>
-        <div class="form-group">
-            <label for="surname">Прізвище</label>
-            <input type="text" name="surname" class="form-control" id="surname" placeholder="Введите имя"
         value="{{$user->name ?? ''}}">
         </div>
         <div class="form-group">

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
 @isset($group)
    
 @endisset
+@section('content-title','Профіль')
         <div class="container">
-            <div class="text-center">
-                <h2>Профиль</h2>
-            </div>
+            
             <div class="profile py-3">
                 @empty($images)         
                     <div class="profile-img text-center">
@@ -41,42 +41,29 @@
                     </div>
                 @endempty
             <div class="profile-text">
-                <p>Имя: {{auth()->user()->name}}</p>
+                <p><span class="color-black">ПІБ: </span> {{auth()->user()->name}}</p>
+            </div>
+            <div class="profile-text">
+                <p><span class="color-black">E-mail: </span> {{auth()->user()->email}}</p>
             </div>
             @isset($group)
                 <div class="profile-text">
-                    <p>Студент групи: {{$group->name}}</p>
+                    <p><span class="color-black">Студент групи: </span>{{$group->name}}</p>
                 </div>
             @endisset
             <div class="profile-date">
-                <p>Зарегистрирован: {{auth()->user()->created_at->diffForHumans()}}</p>
+                <p><span class="color-black">Зареєстрований: </span>{{auth()->user()->created_at}}</p>
             </div>
         </div>  
         <div class="container-fluid d-flex">
+            
+            @isset($group)
             <div class="col-6">
                 <div class="card">
                     <div class="card-header">
-                        Уведомления
+                        Предмети групи {{$group->name }}
                     </div>
-                    <div class="card-body" style="padding: 0">
-                        <ul class="list-group list-group-flush">
-                            @foreach($notifications as $notification)
-                                <li class="list-group-item">
-                                    @if($notification->data['message'])
-                                    {{$notification->data['message'] . PHP_EOL . $notification->created_at->diffForHumans()}}
-                                    @endif
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-header">
-                        Предмети 
-                    </div>
-                @isset($group)
+                
                     <div class="card-body" style="padding: 0">
                         <ul class="list-group list-group-flush">
                             @foreach($subjects as $subject)
@@ -87,8 +74,9 @@
                         </ul>
                     </div>
                 </div>
-                @endisset    
-            </div>    
+                 
+            </div> 
+            @endisset    
         </div> 
     </div>
 @endsection

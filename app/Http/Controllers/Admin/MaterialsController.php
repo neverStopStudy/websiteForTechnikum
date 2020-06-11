@@ -41,7 +41,8 @@ class MaterialsController extends Controller
     public function store(MaterialRequest $request)
     {
         $file = $request->file('link');
-        $path = $file->storeAs('files', $file->getClientOriginalName());
+        // $path = $file->storeAs('files', $file->getClientOriginalName());
+        $path = $file->storeAs('public/files', $file->getClientOriginalName());
  
         Material::create([
             'subject_id' => $request->subject_id,
@@ -60,8 +61,9 @@ class MaterialsController extends Controller
      * @param  \App\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function show(Material $material)
+    public function show($id)
     {
+        $material = Material::find($id);
         return view('admin.materials.show', compact('material'));
     }
 

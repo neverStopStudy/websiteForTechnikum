@@ -54,7 +54,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard.index');
     
         Route::resource('group', 'GroupsController');
-        Route::get('group/{group}/user/{user}/delete', 'GroupsController@deleteUserFromGroup')->name('group.delete.user');     
+        Route::get('group/{group}/user/{user}/delete', 'GroupsController@deleteUserFromGroup')->name('group.delete.user');
+        Route::get('group/{group}/subject/{subject}/delete', 'GroupsController@deleteSubjectFromGroup')->name('group.delete.subject');     
     
         Route::resource('subject', 'SubjectsController');
         
@@ -83,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
     
 Route::resource('subject', 'SubjectsController');
 
-Route::get('download/{path}', 'DownloadFilesController@download')->name('download');
+Route::get('/download/{path}', 'DownloadFilesController@index')->name('download');
 
 Route::post('/user/store', 'UsersController@store')->name('user.store');
 Route::get('/user/{id}/show', 'UsersController@show')->name('user.show');

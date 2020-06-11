@@ -67,7 +67,7 @@ class ArticlesController extends Controller
             }
         } 
 
-        return redirect()->route('welcome');
+        return redirect()->route("/");
     }
 
     public function edit($id)

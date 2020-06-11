@@ -1,5 +1,4 @@
-{{--@extends("admin.layouts.layout")--}}
-@extends("layouts.app")
+@extends('admin.layouts.layout')
 @section('breadcrumbs')
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -9,6 +8,7 @@
     </div>
 @endsection
 @section("content")
+@section('content-title','Всі студентські групи')
     <div class="admin-btn text-left py-3">
         <a href="{{route('group.create')}}">
             <button type="button" class="btn btn-primary">Додати групу</button>
@@ -29,17 +29,17 @@
                 <th>{{$group->name}}</th>
                 <th>
                     <div class="btn-group">
-                        <div class="article__link">
+                        <div class="btn-group__control">
                             <a href="{{route("group.show", $group->id)}}">
                                 <button type="button" class="btn btn-success">Дивитись</button>
                             </a>
                         </div>
-                        <div class="article__link">
+                        <div class="btn-group__control">
                             <a href="{{route('group.edit', $group->id)}}">
                                 <button type="button" class="btn btn-warning">Змінити</button>
                             </a>
                         </div>
-                        <div class="article__link">
+                        <div class="btn-group__control">
                             <form action="{{route('group.destroy', $group->id)}}" method="post">
                                 @csrf
                                 @method("DELETE")

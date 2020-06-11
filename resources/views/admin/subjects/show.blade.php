@@ -1,5 +1,4 @@
-@extends("layouts.app")
-
+@extends('admin.layouts.layout')
 @section("breadcrumbs")
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -10,13 +9,14 @@
     </div>
 @endsection
 @section("content")
+@section('content-title','Перегляд предмету ' . $subject->name)
 <div class="btn-group py-3">
-    <div class="article__link">
+    <div class="btn-group__control">
         <a href="{{route('subject.edit', $subject)}}">
             <button type="button" class="btn btn-warning">Змінити</button>
         </a>
     </div>
-    <div class="article__link">
+    <div class="btn-group__control">
         <form action="{{route('subject.destroy', $subject)}}" method="post">
             @csrf
             @method("DELETE")
@@ -39,7 +39,7 @@
     <div class="tab-content">
         <!-- Students -->  
         <div class="tab-pane fade show active" id="students">
-            <div class="col-12 col-sm-9 content py-3">
+           
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
@@ -55,12 +55,12 @@
                             <th>{{$group->name}}</th>
                             <th>
                                 <div class="btn-group">
-                                    <div class="article__link">
+                                    <div class="btn-group__control">
                                         <a href="{{route('group.show', $group->id)}}">
                                             <button type="button" class="btn btn-success">Дивитись</button>
                                         </a>
                                     </div>
-                                    <div class="article__link">
+                                    <div class="btn-group__control">
                                         <form action="{{route('group.destroy', $group->id)}}" method="get">
                                             @csrf
                                             @method("DELETE")
@@ -80,11 +80,11 @@
                     </tbody>
                 </table>
                 {{--  END MAIN     --}}
-            </div>
+  
         </div>
         <!-- Subjects -->  
         <div class="tab-pane fade" id="subjects">
-            <div class="col-12 col-sm-9 content py-3">
+            
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
@@ -130,7 +130,7 @@
                     </tbody>
                 </table>
                 {{--  END MAIN     --}}
-            </div>
+            
         </div>
         
     </div> 

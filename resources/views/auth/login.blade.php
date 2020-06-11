@@ -1,24 +1,24 @@
-@extends('layouts.auth')
+@extends("layouts.app")
 
 @section('breadcrumbs')
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('user.article.index')}}">Головна сторінка</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Логін</li>
+            <li class="breadcrumb-item active" aria-current="page">Увійти</li>
         </ol>
     </div>
 @endsection
 @section('content')
-    
+@section('content-title','Увійти')
         
             <div class="card">
-                <div class="card-header">{{ __('Логін') }}</div>
+                <div class="card-header">{{ __('Форма для входу') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Адреса') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -60,7 +60,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Логін') }}
+                                    {{ __('Увійти') }}
                                 </button>
 
                                 @if (Route::has('password.request'))

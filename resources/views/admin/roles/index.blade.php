@@ -1,10 +1,14 @@
 {{--@extends("admin.layouts.layout")--}}
-@extends("layouts.app")
-<style>
-    .article__link {
-        margin-right: 5px;
-    }
-</style>
+@extends('admin.layouts.layout')
+
+@section('breadcrumbs')
+    <div aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">Адмінка</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Всі ролі</li>
+        </ol>
+    </div>
+@endsection
 @section("side-block")
     <div class="col-sm-3 col-12 side-block">
         <div class="side-menu">
@@ -21,7 +25,7 @@
     </div>
 @endsection
 @section("content")
-    <div class="col-12 col-sm-9 content">
+@section('content-title','Всі ролі')
         <table class="table">
             <thead class="thead-light">
             <tr>
@@ -40,13 +44,13 @@
                     <th>{{$role->slug}}</th>
                     <th>{{$role->users->count()}}</th>
                     <th>
-                        <div class="btn-group-vertical">
-                            <div class="role__link">
+                        <div class="btn-group">
+                            <div class="btn-group__control">
                                 <a href="{{route('role.edit', $role->id)}}">
                                     <button type="button" class="btn btn-warning">Змінити</button>
                                 </a>
                             </div>
-                            <div class="role__link">
+                            <div class="btn-group__control">
                                 <form action="{{route('role.destroy', $role->id)}}" method="get">
                                     @csrf
                                     @method("DELETE")
@@ -60,34 +64,13 @@
                 </tr>
             @empty
                 <tr class="table-warning">
-                    <td colspan="4">Нет ролей! Добавьте роль!</td>
+                    <td colspan="4">Немає ролей! Додайте роль!</td>
                 </tr>
             @endforelse
             </tbody>
         </table>
         {{--  END MAIN     --}}
-        <div class="container d-flex justify-content-center">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#!" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#!">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#!" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+ 
 @endsection
 
 

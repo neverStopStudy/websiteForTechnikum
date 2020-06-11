@@ -1,5 +1,4 @@
-{{--@extends("admin.layouts.layout")--}}
-@extends("layouts.app")
+@extends('admin.layouts.layout')
 @section('breadcrumbs')
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -9,12 +8,12 @@
     </div>
 @endsection
 @section("content")
+@section('content-title','Всі навчальні предмети')
 <div class="admin-btn text-left py-3">
     <a href="{{route('subject.create')}}">
         <button type="button" class="btn btn-primary">Додати предмет</button>
     </a>
 </div>
-    <div class="col-12 col-sm-9 content">
         <table class="table">
             <thead class="thead-light">
                 <tr>
@@ -30,17 +29,17 @@
                     <th>{{$subject->name}}</th>
                     <th>
                         <div class="btn-group">
-                            <div class="article__link">
+                            <div class="btn-group__control">
                                 <a href="{{route("subject.show", $subject->id)}}">
                                     <button type="button" class="btn btn-success">Дивитись</button>
                                 </a>
                             </div>
-                            <div class="article__link">
+                            <div class="btn-group__control">
                                 <a href="{{route('subject.edit', $subject->id)}}">
                                     <button type="button" class="btn btn-warning">Змінити</button>
                                 </a>
                             </div>
-                            <div class="article__link">
+                            <div class="btn-group__control">
                                 <form action="{{route('subject.destroy', $subject->id)}}" method="post">
                                     @csrf
                                     @method("DELETE")
@@ -60,7 +59,7 @@
             </tbody>
         </table>
         {{--  END MAIN     --}}
-    </div>
+
 @endsection
 
 
