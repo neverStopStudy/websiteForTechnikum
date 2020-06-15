@@ -89,4 +89,12 @@ class SubjectsController extends Controller
         Subject::destroy($subject->id);
         return redirect()->route('subject.index');
     }
+
+    public function materials(int $id)
+    {
+        $subject = Subject::with('materials')->where('id',"=", $id)->first();
+        $subjname = $subject->name;
+        $materials = $subject->materials;
+        return view('user.subjectMaterials', compact('materials','subjname'));
+    }
 }

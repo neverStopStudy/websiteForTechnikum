@@ -12,4 +12,9 @@ class CommentsController extends Controller
         Comment::create($request->all());
         return redirect()->back();
     }
+
+    public function delete(int $id) {
+        Comment::destroy($id);
+        return redirect()->back();
+    }
 }

@@ -53,12 +53,12 @@
                             @else
                                 <a href="{{route("user.article.show", $article->id)}}">
                             @endadmin
-                                <button type="button" class="btn btn-success">Читати</button>
+                                <button type="button" class="btn btn-success" style="margin-right: 5px;">Читати</button>
                             </a>
                         </div>
                         @admin
                         <a href="{{route('admin.article.edit', $article->id)}}">
-                            <button type="button" class="btn btn-warning">Змінити</button>
+                            <button type="button" class="btn btn-warning" style="margin-right: 5px;">Змінити</button>
                         </a>
                         <form action="{{route('admin.article.destroy', $article->id)}}" method="get">
                             @csrf
@@ -78,7 +78,7 @@
 
 @section('pagination')
     @if($articles->total() > $articles->count())
-        <div class="pagination d-flex flex-row justify-content-center">        
+        <div class="pagination d-flex flex-row justify-content-center py-3">        
             <div class="raw justify-content-center">
                 <div class="col-md-4">
                     {{$articles->links()}}

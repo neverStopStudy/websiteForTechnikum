@@ -68,7 +68,7 @@
                         <ul class="list-group list-group-flush">
                             @foreach($subjects as $subject)
                                 <li class="list-group-item">
-                                <a href="{{route('subject.show',$subject->id)}}">{{$subject->name}}</a>
+                                <a href="{{route('subject.materials', $subject->id)}}">{{$subject->name}}</a>
                                 </li>
                             @endforeach
                         </ul>

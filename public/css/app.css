@@ -10996,6 +10996,7 @@ footer {
 
 .article__img img {
   width: 100%;
+  height: 230px;
 }
 
 .article {
@@ -11232,6 +11233,14 @@ footer {
 
 .footer__title {
   color: #FFF;
+}
+
+.comment__wrapper > .card-body {
+  padding: 10px;
+}
+
+.comment-author {
+  color: black;
 }
 
 .btn-group__control {

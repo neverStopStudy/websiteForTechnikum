@@ -130,11 +130,11 @@
                             <li class="drop-down-list">
                                 <a href="#" >Інформація про технікум</a>
                                 <ul class="drop-list">
-                                    <li><a href="#" >Icторiя</a></li>
-                                    <li><a href="#" >Лiцензiя та сертифiкати</a></li>
-                                    <li><a href="#" >Cпецiальностi</a></li>
-                                    <li><a href="#" >Адмiнicтрацiя</a></li>
-                                    <li><a href="#" >Педагогичний колектив</a></li>
+                                    <li><a href="{{route('page.information.history')}}" >Icторiя</a></li>
+                                    <li><a href="{{route('page.information.license')}}" >Лiцензiї та сертифiкати</a></li>
+                                    <li><a href="{{route('page.information.specialty')}}" >Cпецiальностi</a></li>
+                                    <li><a href="{{route('page.information.administration')}}" >Адмiнicтрацiя</a></li>
+                                    <li><a href="{{route('page.information.teachers')}}" >Педагогичний колектив</a></li>
                                 </ul>
                             </li>
                             <li class="drop-down-list">

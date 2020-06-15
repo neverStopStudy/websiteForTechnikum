@@ -40,15 +40,19 @@ class MaterialsController extends Controller
     public function store(MaterialRequest $request)
     {
         $file = $request->file('link');
-        $path = $file->storeAs('files', $file->getClientOriginalName());
- 
+        // $path = $file->storeAs('files', $file->getClientOriginalName());
+        $path = $file->storeAs('public', $file->getClientOriginalName());
+
+        $path = explode('/',$path);
+        
         Material::create([
             'subject_id' => $request->subject_id,
             'user_id' => $request->user_id,
             'name' => $request->name,
             'text' =>  $request->text,
-            'link' =>  $path,
+            'link' =>  $path[1],
         ]);
+
 
         return redirect()->route('teacher.material.ownmaterial');
     }
@@ -59,8 +63,9 @@ class MaterialsController extends Controller
      * @param  \App\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function show(Material $material)
+    public function show($id)
     {
+        $material = Material::find($id);
         return view('teacher.materials.show', compact('material'));
     }
 

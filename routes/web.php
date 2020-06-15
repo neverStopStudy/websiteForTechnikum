@@ -83,6 +83,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
     
 Route::resource('subject', 'SubjectsController');
+Route::get('/subject/{id}/materials', 'SubjectsController@materials')->name('subject.materials');
+Route::get('/{id}/show', 'User\MaterialsController@showForStudent')->name('user.material.show');
 
 Route::get('/download/{path}', 'DownloadFilesController@index')->name('download');
 
@@ -90,7 +92,9 @@ Route::post('/user/store', 'UsersController@store')->name('user.store');
 Route::get('/user/{id}/show', 'UsersController@show')->name('user.show');
 Route::get('/user/{id}/edit', 'UsersController@edit')->name('user.edit');
 Route::put('/user/{id}/update', 'UsersController@update')->name('user.update');
+
 Route::post('/comment/store', 'CommentsController@store')->name('comment.store')->middleware('auth');
+Route::get('/comment/{id}/delete', 'CommentsController@delete')->name('comment.delete')->middleware('auth');
 
 Route::get('/', 'ArticlesController@welcome')->name('user.article.index');
 Route::get('/article/create', 'ArticlesController@create')->name('user.article.create');
@@ -101,6 +105,16 @@ Route::put('/article/{id}/update', 'ArticlesController@update')->name('user.arti
 Route::get('/article/{id}/delete', 'ArticlesController@destroy')->name('user.article.destroy');
 
 Auth::routes();
+
+Route::group(['group' => 'pages'], function () {
+    Route::group(['group' => 'information'], function () {
+        Route::get('/information/history', 'PagesInformationController@history')->name('page.information.history');
+        Route::get('/information/license', 'PagesInformationController@license')->name('page.information.license');
+        Route::get('/information/specialty', 'PagesInformationController@specialty')->name('page.information.specialty');
+        Route::get('/information/administration', 'PagesInformationController@administration')->name('page.information.administration');
+        Route::get('/information/teachers', 'PagesInformationController@teachers')->name('page.information.teachers');
+    }); 
+});
 
 
 

@@ -29,10 +29,10 @@
         @forelse($materials as $material)
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
-                <th>{{mb_substr($material->subject->name, 0, 20)}}</th>
+                <th>{{mb_substr($material->subject->name, 0, 15)}}</th>
                 {{-- <th><a href="{{$material->link}}" >{{mb_substr($material->name, 0, 30)}}</a></th> --}}
-                <th>{{mb_substr($material->name, 0, 30)}}</th>
-                <th>{{mb_substr($material->text, 0 ,20)}}</th>
+                <th>{{mb_substr($material->name, 0, 10)}}</th>
+                <th>{{mb_substr($material->text, 0 ,10)}}</th>
                 <th>
                     <div class="btn-group">
                         <div class="btn-group__control">

@@ -70,7 +70,7 @@ class UsersController extends Controller
             }
         }
         
-        return redirect()->route('home');
+        return redirect()->back();
     }
 
     /**
@@ -150,7 +150,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->images()->delete();
+        if(!is_null(User::find($id)->images())){ User::find($id)->images()->delete();}
         User::destroy($id);
         return redirect()->back();
     }

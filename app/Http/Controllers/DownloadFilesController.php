@@ -9,7 +9,8 @@ class DownloadFilesController extends Controller
 {
     public function index($path){
         // dd($path);
-        return response()->download(public_path($path));
+        // dd(public_path("storage\\" . $path));
+        return response()->download(public_path("storage\\" . $path));
        
         //return response()->download($path);
         // return Storage::download($path);

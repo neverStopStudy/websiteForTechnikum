@@ -42,14 +42,15 @@ class MaterialsController extends Controller
     {
         $file = $request->file('link');
         // $path = $file->storeAs('files', $file->getClientOriginalName());
-        $path = $file->storeAs('public/files', $file->getClientOriginalName());
- 
+        $path = $file->storeAs('public', $file->getClientOriginalName());
+
+        $path = explode('/',$path);
         Material::create([
             'subject_id' => $request->subject_id,
             'user_id' => $request->user_id,
             'name' => $request->name,
             'text' =>  $request->text,
-            'link' =>  $path,
+            'link' =>  $path[1],
         ]);
 
         return redirect()->route('admin.material.index');
@@ -106,5 +107,7 @@ class MaterialsController extends Controller
         Material::destroy($id);
         return redirect()->route('admin.material.index');
     }
+
+
     
 }

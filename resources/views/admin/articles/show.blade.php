@@ -55,13 +55,25 @@
                         <h4 class="comment-author card-title">
                             Aвтор: {{$comment->user->name}}
                         </h4>
-                        <div class="comment-text card-text">
+                        <div class="comment-text card-text card-subtitle mb-2">
                             {{$comment->text}}
                         </div>
-                        <div class="comment-date card-subtitle mb-2 text-mute">
-                            {{$comment->created_at}}
+                        <div class="comment-date card-subtitle mb-2">
+                            Дата: {{$comment->created_at}}
                         </div>
+                        @if($comment->user_id == Auth::user()->id)
+                    <div class="btn-group__control">
+                        <form action="{{route('comment.delete', $comment->id)}}" method="get">
+                            @csrf
+                            @method("DELETE")
+                            <button type="button" class="btn btn-danger admin-delete-btn" >
+                                <input type="submit" value="Видалити коментар" class="btn admin-delete-input" style="color: white">
+                            </button>
+                        </form>
                     </div>
+                    @endif
+                    </div>
+                    
                 </div>
                 {{--  #TODO  make views count--}}
             @empty
